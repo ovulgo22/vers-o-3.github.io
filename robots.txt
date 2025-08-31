@@ -1,0 +1,6 @@
+# Permitir que todos os robôs de busca acessem todo o conteúdo.
+User-agent: *
+Allow: /
+
+# Opcional, mas recomendado: adicione a localização do seu sitemap quando tiver um.
+# Sitemap: https://www.yourdomain.com/sitemap.xml
