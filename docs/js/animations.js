@@ -1,35 +1,26 @@
-// animations.js
+/**
+ * Observa as seções e adiciona uma classe para animá-las quando entram na viewport.
+ * Essa abordagem é extremamente performática.
+ */
+export function observeSections() {
+    const sections = document.querySelectorAll('.carousel-section');
 
-class ScrollAnimator {
-    constructor() {
-        this.elementsToAnimate = document.querySelectorAll('.content-carousel');
-        if (this.elementsToAnimate.length === 0) return;
-        
-        this.initObserver();
-    }
+    const observerOptions = {
+        root: null, // Observa em relação à viewport
+        rootMargin: '0px',
+        threshold: 0.1 // Ativa quando 10% da seção está visível
+    };
 
-    initObserver() {
-        const options = {
-            root: null, // viewport
-            rootMargin: '0px',
-            threshold: 0.1 // Anima quando 10% do elemento está visível
-        };
-
-        this.observer = new IntersectionObserver(this.handleIntersect.bind(this), options);
-        this.elementsToAnimate.forEach(el => this.observer.observe(el));
-    }
-
-    handleIntersect(entries, observer) {
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('reveal');
-                // Para de observar o elemento depois que a animação foi acionada
-                observer.unobserve(entry.target);
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Para de observar depois de animar
             }
         });
-    }
-}
+    }, observerOptions);
 
-document.addEventListener('DOMContentLoaded', () => {
-    new ScrollAnimator();
-});
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+}
