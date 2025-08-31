@@ -226,3 +226,39 @@ body.modal-is-open { overflow: hidden; }
     .card { width: 320px; }
     .carousel { padding-left: var(--spacing-xl); }
 }
+
+/* ==========================================================================
+   7. NOVA SEÇÃO: View de Categoria
+   INSTRUÇÃO: Adicione este bloco inteiro no final do seu arquivo style.css
+   ========================================================================== */
+
+.category-view {
+    padding: 120px var(--spacing-lg) var(--spacing-xl); /* Padding superior para o header fixo */
+    max-width: 1920px;
+    margin: 0 auto;
+    animation: fadeIn 1s var(--transition-timing-standard); /* Animação de entrada suave */
+}
+
+.category-title {
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
+    padding-left: var(--spacing-sm);
+    border-left: 4px solid var(--color-accent);
+}
+
+.category-grid {
+    display: grid;
+    /* CÁLCULO DE POSIÇÃO AVANÇADO: Grid Responsivo Automático
+    - repeat(auto-fill, ...): Cria quantas colunas couberem no espaço disponível.
+    - minmax(280px, 1fr): Cada coluna terá no mínimo 280px, mas poderá se esticar para preencher o espaço (1fr).
+    - Isso torna a grade perfeitamente fluida para telas de celular, tablets e desktops sem a necessidade de múltiplas media queries.
+    */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Pequeno ajuste para garantir que os cards dentro da grade se comportem bem */
+.category-grid .card {
+    width: 100%; /* O card ocupará 100% da célula da grade */
+}
