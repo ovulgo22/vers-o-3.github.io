@@ -110,3 +110,58 @@ button:focus-visible {
 .theme-icon-spin {
     animation: rotateIcon 0.4s ease-in-out;
 }
+
+/* ==========================================================================
+   5. ANIMAÇÕES DE COMPONENTES V3.0
+   ========================================================================== */
+
+/*
+  Animações para o sistema de Modal.
+  'fadeIn' para o overlay, 'scaleUp' para o conteúdo do modal.
+*/
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/*
+  Aplicamos as animações quando o modal é exibido.
+  A classe .is-opening será adicionada via JavaScript.
+*/
+.modal-overlay.is-opening {
+    animation: fadeIn var(--transition-speed) ease-out forwards;
+}
+
+.modal-overlay.is-opening .modal-content {
+    animation: scaleUp var(--transition-speed) ease-out forwards;
+}
+
+/* Animação de saída. A classe .is-closing será adicionada via JS
+  antes de remover o elemento do DOM.
+*/
+.modal-overlay.is-closing {
+    animation: fadeOut var(--transition-speed) ease-in forwards;
+}
+
+/*
+  Animação sutil de pulso para o botão de enviar recado.
+*/
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.submit-button:hover {
+    animation: pulse 1s infinite;
+}
