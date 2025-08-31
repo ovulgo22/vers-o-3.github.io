@@ -1,14 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário | Fronteiras da Computação</title>
+    <meta name="description" content="Um glossário completo com os termos e conceitos essenciais da Inteligência Artificial e da Computação Quântica.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚛️%3C/text%3E%3C/svg%3E">
+    </head>
 <body id="page-glossary">
-    <main class="page-main">
+    <div class="aurora-background">
+      </div>
+    <header class="site-header fixed">
+        </header>
+    <main role="main" class="page-main">
         <div class="container">
             <h1 class="page-title">Glossário de Termos</h1>
-            <div class="glossary-grid">
+            <p class="page-subtitle">Definições rápidas para os conceitos mais importantes em IA e Computação Quântica.</p>
+            
+            <div class="search-wrapper">
+                <input type="text" id="glossary-search" placeholder="Buscar por um termo..." aria-label="Buscar no glossário">
+            </div>
+
+            <div class="glossary-grid" id="glossary-grid">
+                <div class="glossary-item">
+                    <h3>Algoritmo</h3>
+                    <p>Um conjunto de regras ou instruções passo a passo para resolver um problema ou realizar uma tarefa. A base de todo software.</p>
+                </div>
+                <div class="glossary-item">
+                    <h3>Alinhamento (IA)</h3>
+                    <p>O desafio de garantir que os objetivos de um sistema de IA avançado estejam alinhados com os valores e intenções humanas.</p>
+                </div>
+                 <div class="glossary-item">
+                    <h3>Backpropagation</h3>
+                    <p>O algoritmo fundamental para treinar redes neurais. Ele calcula o gradiente da função de erro em relação aos pesos da rede.</p>
+                </div>
+                <div class="glossary-item">
+                    <h3>Decoerência Quântica</h3>
+                    <p>A perda de informações de um sistema quântico para o ambiente. É o maior obstáculo para a construção de computadores quânticos estáveis.</p>
+                </div>
+                <div class="glossary-item">
+                    <h3>Deep Learning</h3>
+                    <p>Um subcampo do Machine Learning baseado em redes neurais com muitas camadas (profundas), que permite aprender padrões complexos.</p>
+                </div>
+                <div class="glossary-item">
+                    <h3>Emaranhamento Quântico</h3>
+                    <p>Um fenômeno no qual dois ou mais qubits se tornam interligados, de modo que o estado de um afeta instantaneamente o outro.</p>
+                </div>
+                <div class="glossary-item">
+                    <h3>GAN (Rede Adversarial Generativa)</h3>
+                    <p>Uma arquitetura de IA com duas redes (um gerador e um discriminador) que competem entre si para criar dados sintéticos realistas.</p>
+                </div>
+                <div class="glossary-item">
+                    <h3>LLM (Large Language Model)</h3>
+                    <p>Um tipo de modelo de IA treinado em vastas quantidades de texto para entender, gerar e interagir usando a linguagem humana. Ex: GPT-4.</p>
+                </div>
                 <div class="glossary-item">
                     <h3>Qubit (Quantum Bit)</h3>
-                    <p>A unidade básica de informação quântica. Diferente de um bit clássico, um qubit pode representar 0, 1 ou ambos os estados simultaneamente (superposição).</p>
+                    <p>A unidade básica de informação quântica. Pode existir nos estados 0, 1 ou em uma superposição de ambos, permitindo um poder de processamento massivo.</p>
                 </div>
+                <div class="glossary-item">
+                    <h3>Rede Neural Artificial</h3>
+                    <p>Um modelo computacional inspirado na estrutura do cérebro humano, composto por nós (neurônios) interconectados em camadas.</p>
                 </div>
+                 <div class="glossary-item">
+                    <h3>Superposição</h3>
+                    <p>O princípio da mecânica quântica que permite a um qubit existir em múltiplos estados (0 e 1) ao mesmo tempo até ser medido.</p>
+                </div>
+                 <div class="glossary-item">
+                    <h3>Transformer</h3>
+                    <p>Uma arquitetura de rede neural baseada em mecanismos de "atenção", que se tornou a base para os LLMs mais avançados.</p>
+                </div>
+            </div>
         </div>
     </main>
+
+    <footer class="site-footer">
+        </footer>
     <script src="script.js"></script>
 </body>
+</html>
