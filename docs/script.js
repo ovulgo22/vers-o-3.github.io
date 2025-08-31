@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ARQUIVO: script.js (VERSÃO FINAL REVISADA E REFINADA)
+   ARQUIVO: script.js (VERSÃO FINAL COM CARROSSÉIS INTELIGENTES)
    PROJETO: Pitchutcha TV+
    ========================================================================== */
 
@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------
 // 1. STATE: Simulação de uma API de conteúdo
 // --------------------------------------------------------------------------
-const apiData = { /* ... (os dados permanecem os mesmos da versão anterior, omitido por brevidade) ... */ 
+const apiData = { 
     series: [
         { id: 's1', title: 'A Fundação Cósmica', year: 2024, genre: 'Ficção Científica', rating: '16', description: 'Uma saga intergaláctica que narra a jornada de um grupo de exilados para salvar a humanidade e reconstruir a civilização em meio à queda de um Império Galáctico.', thumbnailGradient: 'linear-gradient(to top, #022a4a, #0d5c8d)' },
         { id: 's2', title: 'Ruptura Mental', year: 2025, genre: 'Suspense Psicológico', rating: '18', description: 'Em uma empresa onde a memória de trabalho dos funcionários foi cirurgicamente dividida entre suas vidas pessoais e profissionais, uma funcionária em busca da verdade inicia uma jornada para desvendar a teia de conspirações.', thumbnailGradient: 'linear-gradient(to top, #013237, #0f6f7b)' },
@@ -29,17 +29,12 @@ const apiData = { /* ... (os dados permanecem os mesmos da versão anterior, omi
         { id: 'd3', title: 'A Mente de Gênios', year: 2025, genre: 'Ciência', rating: '10', description: 'Explore os processos de pensamento e as rotinas diárias de alguns dos maiores inovadores vivos do mundo, de cientistas a artistas, para desvendar os segredos da criatividade.', thumbnailGradient: 'linear-gradient(to top, #132542, #264a78)' },
     ]
 };
-
-// REFINAMENTO DE PERFORMANCE: Mantém uma referência ao último elemento focado antes do modal abrir.
 let triggerElement = null;
 
 // --------------------------------------------------------------------------
 // 2. COMPONENTS & UI FUNCTIONS
 // --------------------------------------------------------------------------
 
-/**
- * REFINAMENTO DE CÓDIGO E SEMÂNTICA: Remove JS inline e usa href significativo.
- */
 const createCardHTML = (item, category) => {
     return `
         <li class="card" data-category="${category}" data-id="${item.id}" role="button" tabindex="0">
@@ -58,26 +53,7 @@ const populateCarousel = (carouselListElement, data, category) => {
     carouselListElement.innerHTML = data.map(item => createCardHTML(item, category)).join('');
 };
 
-const setupCarouselControls = (carouselArticleElement) => {
-    // ... (esta função permanece a mesma, omitida por brevidade)
-    const content = carouselArticleElement.querySelector('.carousel-content');
-    const prevButton = carouselArticleElement.querySelector('.control-prev');
-    const nextButton = carouselArticleElement.querySelector('.control-next');
-    if (content.scrollWidth > content.clientWidth) {
-        carouselArticleElement.querySelector('.carousel-controls').style.display = 'flex';
-    }
-    nextButton?.addEventListener('click', () => {
-        const scrollAmount = content.clientWidth * 0.75;
-        content.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
-    prevButton?.addEventListener('click', () => {
-        const scrollAmount = content.clientWidth * 0.75;
-        content.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
-};
-
 const setupScrollHeaderEffect = (headerElement) => {
-    // ... (esta função permanece a mesma, omitida por brevidade)
     window.addEventListener('scroll', () => {
         if (window.scrollY > 10) {
             headerElement.classList.add('scrolled');
@@ -88,32 +64,25 @@ const setupScrollHeaderEffect = (headerElement) => {
 };
 
 // --------------------------------------------------------------------------
-// 3. Lógica do Modal (Refinada para Acessibilidade e Performance)
+// 3. Lógica do Modal
 // --------------------------------------------------------------------------
 
 function openModal(itemData, domElements) {
-    triggerElement = document.activeElement; // REFINAMENTO DE ACESSIBILIDADE: Salva quem abriu o modal
-
-    // REFINAMENTO DE PERFORMANCE: Usa referências de elementos já selecionadas
+    triggerElement = document.activeElement;
     domElements.modal.thumbnail.style.background = itemData.thumbnailGradient;
     domElements.modal.title.textContent = itemData.title;
     domElements.modal.year.textContent = itemData.year;
     domElements.modal.genre.textContent = itemData.genre;
     domElements.modal.rating.textContent = `${itemData.rating === 'Livre' ? '' : '+'}${itemData.rating}`;
     domElements.modal.description.textContent = itemData.description;
-
     document.body.classList.add('modal-is-open');
     domElements.modal.container.classList.add('is-open');
-
-    // REFINAMENTO DE ACESSIBILIDADE: Move o foco para dentro do modal
     domElements.modal.closeButton.focus();
 }
 
 function closeModal(domElements) {
     document.body.classList.remove('modal-is-open');
     domElements.modal.container.classList.remove('is-open');
-    
-    // REFINAMENTO DE ACESSIBILIDADE: Devolve o foco para quem abriu o modal
     triggerElement?.focus();
 }
 
@@ -121,17 +90,14 @@ function setupModalEventListeners(domElements) {
     domElements.carouselsContainer.addEventListener('click', (event) => {
         const card = event.target.closest('.card');
         if (!card) return;
-
         const category = card.dataset.category;
         const id = card.dataset.id;
         const itemData = apiData[category]?.find(item => item.id === id);
-
         if (itemData) {
             openModal(itemData, domElements);
         }
     });
     
-    // Permite que o card seja ativado com a tecla Enter, como um botão
     domElements.carouselsContainer.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const card = event.target.closest('.card');
@@ -152,19 +118,16 @@ function setupModalEventListeners(domElements) {
         if (event.key === 'Escape' && domElements.modal.container.classList.contains('is-open')) {
             closeModal(domElements);
         }
-        
-        // REFINAMENTO DE ACESSIBILIDADE: "Prende" o foco dentro do modal
         if (event.key === 'Tab' && domElements.modal.container.classList.contains('is-open')) {
             const focusableElements = domElements.modal.content.querySelectorAll('button');
             const firstElement = focusableElements[0];
             const lastElement = focusableElements[focusableElements.length - 1];
-
-            if (event.shiftKey) { // Shift + Tab
+            if (event.shiftKey) {
                 if (document.activeElement === firstElement) {
                     lastElement.focus();
                     event.preventDefault();
                 }
-            } else { // Tab
+            } else {
                 if (document.activeElement === lastElement) {
                     firstElement.focus();
                     event.preventDefault();
@@ -175,10 +138,62 @@ function setupModalEventListeners(domElements) {
 }
 
 // --------------------------------------------------------------------------
-// 4. INITIALIZATION (Final e completa)
+// 4. NOVA LÓGICA: Carrosséis Inteligentes
+// --------------------------------------------------------------------------
+
+/**
+ * Calcula e atualiza o estado (habilitado/desabilitado) dos botões do carrossel.
+ * @param {HTMLElement} content - O elemento .carousel-content que faz o scroll.
+ * @param {HTMLButtonElement} prevBtn - O botão de voltar.
+ * @param {HTMLButtonElement} nextBtn - O botão de avançar.
+ */
+function updateCarouselButtons(content, prevBtn, nextBtn) {
+    const scrollLeft = content.scrollLeft;
+    const scrollWidth = content.scrollWidth;
+    const clientWidth = content.clientWidth;
+    
+    // O botão "anterior" é desabilitado se o scroll estiver no início.
+    prevBtn.disabled = scrollLeft < 1;
+
+    // O botão "próximo" é desabilitado se o final do scroll for atingido.
+    // Usamos uma margem de 1px para evitar problemas de arredondamento em alguns navegadores.
+    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 1;
+}
+
+/**
+ * Inicializa um único carrossel, adicionando os listeners para os botões e para o scroll.
+ * @param {HTMLElement} carouselElement - O elemento <article class="carousel">.
+ */
+function initializeCarousel(carouselElement) {
+    const content = carouselElement.querySelector('.carousel-content');
+    const prevBtn = carouselElement.querySelector('.control-prev');
+    const nextBtn = carouselElement.querySelector('.control-next');
+
+    if (!content || !prevBtn || !nextBtn) return;
+    
+    // Adiciona listener para o scroll (seja pelo mouse, toque ou botões)
+    content.addEventListener('scroll', () => {
+        updateCarouselButtons(content, prevBtn, nextBtn);
+    });
+
+    // Adiciona listeners para os cliques nos botões
+    prevBtn.addEventListener('click', () => {
+        content.scrollBy({ left: -content.clientWidth * 0.8, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+        content.scrollBy({ left: content.clientWidth * 0.8, behavior: 'smooth' });
+    });
+
+    // Chama a função uma vez no início para definir o estado inicial correto dos botões
+    updateCarouselButtons(content, prevBtn, nextBtn);
+}
+
+
+// --------------------------------------------------------------------------
+// 5. INITIALIZATION (Final e completa)
 // --------------------------------------------------------------------------
 function initializeApp() {
-    // REFINAMENTO DE PERFORMANCE: Centraliza todas as consultas ao DOM
     const domElements = {
         seriesList: document.getElementById('series-list'),
         moviesList: document.getElementById('movies-list'),
@@ -186,7 +201,7 @@ function initializeApp() {
         carousels: document.querySelectorAll('.carousel'),
         mainHeader: document.querySelector('.main-header'),
         carouselsContainer: document.querySelector('.carousels-container'),
-        modal: {
+        modal: { /* ... */ 
             container: document.getElementById('modal-container'),
             content: document.querySelector('.modal-content'),
             overlay: document.getElementById('modal-overlay'),
@@ -204,7 +219,9 @@ function initializeApp() {
     populateCarousel(domElements.moviesList, apiData.movies, 'movies');
     populateCarousel(domElements.docsList, apiData.docs, 'docs');
     
-    domElements.carousels.forEach(setupCarouselControls);
+    // REFINAMENTO FUNCIONAL: Inicializa cada carrossel com a nova lógica inteligente.
+    domElements.carousels.forEach(initializeCarousel);
+
     setupScrollHeaderEffect(domElements.mainHeader);
     setupModalEventListeners(domElements);
 }
