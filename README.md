@@ -1,4 +1,3 @@
-```markdown
 # Portfólio Dinâmico de Arquiteto de Software & Desenvolvedor Full-stack
 
 ![Website Status](https://img.shields.io/website?down_message=offline&label=portfolio&style=for-the-badge&up_message=online&url=https%3A%2F%2FSEU-USUARIO.github.io%2F)
