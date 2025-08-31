@@ -1,0 +1,21 @@
+{
+  "name": "Fronteiras da Computação",
+  "short_name": "Fronteiras",
+  "description": "Um portal educacional sobre Inteligência Artificial e Computação Quântica.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#8B5CF6",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
