@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Ver Minha Jornada', action: () => document.getElementById('jornada').scrollIntoView(), icon: 'command' },
         { name: 'Ver Meu Setup', action: () => document.getElementById('ferramentas').scrollIntoView(), icon: 'menu' },
         { name: 'Entrar em Contato', action: () => document.getElementById('contato').scrollIntoView(), icon: 'mail' },
-        { name: 'Ver Código Fonte no GitHub', action: () => window.open('https://github.com/SEU-USUARIO-GITHUB/SEU-USUARIO-GITHUB.github.io', '_blank'), icon: 'github' },
+        { name: 'Ver Código Fonte no GitHub', action: () => window.open('https://github.com/ovulgo22/vers-o-3.github.io/tree/main', '_blank'), icon: 'github' },
         { name: 'Alternar Tema (Light/Dark)', action: toggleTheme, icon: 'theme' }
     ];
 
