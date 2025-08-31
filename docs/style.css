@@ -251,3 +251,198 @@ a:hover { text-decoration: underline; color: var(--color-accent-hover); }
     .command-palette-modal { margin: var(--spacing-md); }
     .command-palette-overlay { padding-top: 5vh; }
 }
+
+/* ==========================================================================
+   7. COMPONENTES V3.0 (O PORTFÓLIO VIVO)
+   ========================================================================== */
+
+/* Container de Estatísticas (WakaTime) */
+.stats-container {
+    margin-top: var(--spacing-xl);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+}
+.stats-title {
+    margin: 0 0 var(--spacing-md) 0;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+}
+
+/* Estilos para os itens das estatísticas (serão gerados pelo JS) */
+.waka-stats-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.lang-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-family-mono);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+}
+.lang-stat .lang-name { color: var(--color-text-primary); }
+.lang-stat .lang-time { color: var(--color-text-secondary); }
+
+/* Estilo para elementos interativos que abrem modais */
+.interactive {
+    cursor: pointer;
+    position: relative;
+}
+.interactive span {
+    color: var(--color-accent);
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease-in-out;
+    font-size: 0.8rem;
+    margin-left: var(--spacing-sm);
+}
+.interactive:hover span {
+    opacity: 1;
+}
+
+/* Sistema de Modal Genérico */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-lg);
+}
+.modal-content {
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 600px;
+    padding: var(--spacing-xl);
+    position: relative;
+}
+.modal-close-button {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+}
+.modal-title {
+    margin-top: 0;
+    color: var(--color-accent);
+}
+.modal-hidden {
+    display: none;
+}
+
+/* Seção Guestbook (Kudos) */
+.guestbook-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+#guestbook-entries {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: var(--spacing-md);
+}
+.guestbook-entry {
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-md);
+}
+.guestbook-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+.guestbook-entry-header strong {
+    color: var(--color-heading);
+}
+.guestbook-entry-header time {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+.guestbook-form .form-group {
+    margin-bottom: var(--spacing-md);
+}
+.guestbook-form label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.guestbook-form input, .guestbook-form textarea {
+    width: 100%;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-sans);
+    font-size: 1rem;
+}
+.guestbook-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+.submit-button {
+    width: 100%;
+    padding: var(--spacing-md);
+    background-color: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Container do Spotify no Rodapé */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+.spotify-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+.spotify-container .icon {
+    color: #1DB954; /* Cor oficial do Spotify */
+}
+
+/* ==========================================================================
+   8. ATUALIZAÇÕES DE RESPONSIVIDADE (V3.0)
+   ========================================================================== */
+   
+@media (max-width: 768px) {
+    .guestbook-container {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+    }
+    #guestbook-entries {
+        max-height: 300px; /* Reduz altura em mobile */
+        margin-bottom: var(--spacing-xl);
+    }
+}
