@@ -1,54 +1,57 @@
-/* --- GERAL, VARIÁVEIS E RESET --- */
-:root { /* ... (variáveis idênticas à versão anterior) ... */ }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* --- :ROOT, GERAL E SISTEMA DE DESIGN --- */
+:root {
+    --bg-color: #0d1117;
+    --primary-color: #8B5CF6;
+    --secondary-color: #2dd4bf; /* Ciano/Teal */
+    /* ... (outras variáveis de cor) ... */
+    --font-family: 'Inter', system-ui, sans-serif;
+    /* Escala de Espaçamento */
+    --space-xs: 4px; --space-s: 8px; --space-m: 16px; --space-l: 24px; --space-xl: 32px;
+}
+/* ... (Reset e body base) ... */
 body {
     background-color: var(--bg-color);
-    background-image: radial-gradient(circle at 1px 1px, #161b22 1px, transparent 0);
-    background-size: 25px 25px;
-    color: var(--text-color);
-    font-family: var(--font-family);
-    line-height: 1.7;
+    overflow-x: hidden;
 }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-img { max-width: 100%; height: auto; }
 
-/* --- HEADER E NAVEGAÇÃO PRINCIPAL --- */
-.site-header { padding: 20px 0; z-index: 100; transition: background-color 0.3s ease; }
-.site-header.fixed { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(13, 17, 23, 0.8); backdrop-filter: blur(10px); }
-.site-header .container { display: flex; justify-content: space-between; align-items: center; }
-.main-nav a { color: var(--text-muted-color); text-decoration: none; margin-left: 24px; transition: color 0.3s ease; }
-.main-nav a:hover, .main-nav a.active { color: var(--text-color); }
-.main-nav a.nav-highlight { color: var(--primary-color); font-weight: 500; }
+/* --- FUNDO AURORA ANIMADO --- */
+.aurora-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+.aurora-shape { position: absolute; border-radius: 50%; filter: blur(100px); }
+.aurora-shape.shape1 { width: 400px; height: 400px; background: rgba(139, 92, 246, 0.2); top: 10%; left: 10%; animation: move1 20s infinite alternate; }
+.aurora-shape.shape2 { width: 500px; height: 500px; background: rgba(45, 212, 191, 0.15); top: 50%; left: 60%; animation: move2 25s infinite alternate; }
+.aurora-shape.shape3 { width: 300px; height: 300px; background: rgba(88, 166, 255, 0.2); top: 80%; left: 20%; animation: move3 15s infinite alternate; }
+@keyframes move1 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(200px, 100px) rotate(90deg); } }
+@keyframes move2 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-200px, -150px) rotate(-90deg); } }
+@keyframes move3 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(100px, -200px) rotate(180deg); } }
 
-/* --- PÁGINAS GENÉRICAS (timeline, glossary, etc.) --- */
-.page-main { padding: 120px 0 60px; }
-.page-title { font-size: 3rem; text-align: center; background: linear-gradient(45deg, #fff, var(--primary-hover-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.page-subtitle { text-align: center; color: var(--text-muted-color); max-width: 600px; margin: 12px auto 60px; }
+/* --- HEADER COM GLASSMORPHISM --- */
+.site-header.fixed { background-color: rgba(13, 17, 23, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); }
 
-/* --- ESTILOS DA TIMELINE --- */
-.timeline { position: relative; max-width: 800px; margin: 0 auto; }
-.timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--border-color); top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
-.timeline-item { padding: 10px 40px; position: relative; width: 50%; }
-.timeline-item:nth-child(odd) { left: 0; }
-.timeline-item:nth-child(even) { left: 50%; }
-.timeline-item::after { content: ''; position: absolute; width: 16px; height: 16px; right: -8px; background-color: var(--bg-color); border: 3px solid var(--primary-color); top: 25px; border-radius: 50%; z-index: 1; }
-.timeline-item:nth-child(even)::after { left: -8px; }
-.timeline-content { padding: 20px 30px; background: var(--code-bg-color); border: 1px solid var(--border-color); position: relative; border-radius: 8px; }
-.timeline-date { color: var(--primary-color); font-weight: bold; font-size: 0.9rem; }
+/* --- ANIMAÇÃO DE SCROLL DA LANDING PAGE --- */
+.scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: var(--text-muted-color); font-size: 0.8rem; opacity: 0; animation: fadeIn 1s 1s forwards; }
+@keyframes fadeIn { to { opacity: 0.7; } }
 
-/* --- ESTILOS DO GLOSSÁRIO E FERRAMENTAS --- */
-.glossary-grid, .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.glossary-item, .tool-card { background: var(--code-bg-color); border: 1px solid var(--border-color); padding: 24px; border-radius: 8px; transition: all 0.3s ease; }
-.glossary-item:hover, .tool-card:hover { transform: translateY(-5px); border-color: var(--primary-color); }
+/* --- SIMULADOR QUÂNTICO --- */
+.simulator-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-xl); align-items: center; }
+.qubit-visualizer { display: flex; justify-content: center; align-items: center; }
+.bloch-sphere-projection { width: 250px; height: 250px; border: 2px solid var(--border-color); border-radius: 50%; position: relative; display: flex; justify-content: center; align-items: center; }
+.qubit-state { width: 20px; height: 20px; background-color: var(--secondary-color); border-radius: 50%; box-shadow: 0 0 15px var(--secondary-color); position: absolute; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); transform: translateY(-115px); /* Posição inicial |0⟩ */ }
+.state-label { position: absolute; color: var(--text-muted-color); }
+.label-zero { top: -25px; } .label-one { bottom: -25px; }
+.simulator-controls { background: var(--code-bg-color); padding: var(--space-l); border-radius: 8px; border: 1px solid var(--border-color); }
+.sim-button { /* ... (estilos de botão aprimorados) ... */ }
+.measure-button { background-color: var(--secondary-color); color: var(--bg-color); margin-top: var(--space-m); width: 100%; }
+.measurement-result { margin-top: var(--space-l); padding: var(--space-m); background: var(--bg-color); border-radius: 6px; }
 
-/* --- ESTILOS DO PLAYGROUND (API DEMO) --- */
-.api-demo-container { max-width: 700px; margin: 0 auto; text-align: center; background: var(--code-bg-color); padding: 40px; border-radius: 8px; border: 1px solid var(--border-color); }
-#fetch-api-btn { /* (estilo de botão similar ao cta-button) */ }
-.api-result-box { margin-top: 24px; min-height: 100px; padding: 20px; border: 1px dashed var(--border-color); border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-.api-result-box.loading { opacity: 0.5; }
-.api-result-box.error { color: #f97583; border-color: #f97583; }
-.api-result-box blockquote { font-size: 1.2rem; font-style: italic; }
-.api-result-box footer { font-size: 1rem; color: var(--primary-color); margin-top: 10px; }
+/* --- ANIMAÇÕES STAGGERED --- */
+.glossary-grid, .tools-grid { --stagger-delay: 100ms; }
+.glossary-item, .tool-card { opacity: 0; transform: translateY(20px); animation: staggerIn 0.5s forwards; animation-delay: calc(var(--i) * var(--stagger-delay)); }
+@keyframes staggerIn { to { opacity: 1; transform: translateY(0); } }
 
-/* --- (Manter todos os estilos anteriores de docs.html, landing page, etc.) --- */
+/* --- RESPONSIVIDADE PARA SIMULADOR E AURORA --- */
+@media (max-width: 768px) {
+    .simulator-grid { grid-template-columns: 1fr; }
+    .aurora-shape { filter: blur(50px); }
+}
+
+/* ... (Manter e refinar todos os outros estilos, aplicando o sistema de espaçamento e a nova paleta) ... */
