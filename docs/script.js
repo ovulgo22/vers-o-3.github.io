@@ -1,113 +1,161 @@
-const App = {
-    // Objeto para armazenar o estado da aplicação
-    state: {
-        qubit: { alpha: 1, beta: 0 }, // Representa |ψ⟩ = α|0⟩ + β|1⟩
-    },
-
-    init: function() {
-        // ... (código de inicialização e roteamento de página)
-        // Adiciona inicializadores para novas animações
-        this.animations.initStaggering();
-    },
-
-    // Submódulo para Animações
-    animations: {
-        initHomePageScroll: function() {
-            const elements = document.querySelectorAll('[data-scroll-fade]');
-            window.addEventListener('scroll', () => {
-                elements.forEach(el => {
-                    const opacity = Math.max(0, 1 - window.scrollY / 300);
-                    const scale = Math.max(0.9, 1 - window.scrollY / 1000);
-                    el.style.opacity = opacity;
-                    el.style.transform = `scale(${scale})`;
-                });
-            }, { passive: true });
-        },
-        initStaggering: function() {
-            const grids = document.querySelectorAll('.glossary-grid, .tools-grid');
-            grids.forEach(grid => {
-                const items = grid.children;
-                for (let i = 0; i < items.length; i++) {
-                    items[i].style.setProperty('--i', i);
-                }
-            });
-        }
-    },
-    
-    // Submódulo para Componentes
-    components: {
-        // Lógica do Simulador Quântico
-        initQuantumSimulator: function() {
-            const controls = document.querySelector('.simulator-controls');
-            if (!controls) return;
-
-            controls.addEventListener('click', (e) => {
-                if (e.target.matches('[data-gate]')) {
-                    const gate = e.target.dataset.gate;
-                    App.quantum.applyGate(gate);
-                }
-            });
-            App.quantum.updateVisuals();
-        }
-    },
-
-    // Submódulo para lógica de páginas
-    pages: {
-        initHomePage: function() { App.animations.initHomePageScroll(); },
-        initPlaygroundPage: function() { App.components.initQuantumSimulator(); /*...api oracle...*/},
-        // ... (outras páginas)
-    },
-
-    // Submódulo para Lógica Quântica
-    quantum: {
-        applyGate: function(gate) {
-            let { alpha, beta } = App.state.qubit;
-            if (gate === 'reset') {
-                [alpha, beta] = [1, 0];
-            } else if (gate === 'h') { // Hadamard
-                [alpha, beta] = [(alpha + beta) / Math.sqrt(2), (alpha - beta) / Math.sqrt(2)];
-            } else if (gate === 'x') { // Pauli-X (NOT)
-                [alpha, beta] = [beta, alpha];
-            } else if (gate === 'measure') {
-                this.measure();
-                return;
-            }
-            App.state.qubit = { alpha, beta };
-            this.updateVisuals();
-        },
-        measure: function() {
-            const { alpha, beta } = App.state.qubit;
-            const prob0 = alpha * alpha;
-            const rand = Math.random();
-            const result = rand < prob0 ? 0 : 1;
-
-            document.getElementById('measurement-output').innerHTML = `<p><strong>Medição:</strong> Colapsou para o estado <strong>|${result}⟩</strong></p>`;
-            
-            App.state.qubit = (result === 0) ? { alpha: 1, beta: 0 } : { alpha: 0, beta: 1 };
-            this.updateVisuals(true); // Anima o colapso
-        },
-        updateVisuals: function(isCollapse = false) {
-            const { alpha, beta } = App.state.qubit;
-            const prob0 = (alpha * alpha * 100).toFixed(0);
-            const prob1 = (beta * beta * 100).toFixed(0);
-
-            // Atualiza texto de estado e probabilidade
-            document.getElementById('qubit-state-text').textContent = `|ψ⟩ = ${alpha.toFixed(2)} |0⟩ + ${beta.toFixed(2)} |1⟩`;
-            document.getElementById('qubit-prob-text').textContent = `P(0) = ${prob0}%, P(1) = ${prob1}%`;
-            if (!isCollapse) document.getElementById('measurement-output').innerHTML = '';
-
-            // Atualiza visualização do qubit na "esfera"
-            const indicator = document.getElementById('qubit-state-indicator');
-            // Mapeia a probabilidade P(1) para uma posição vertical. 0% -> -115px (|0⟩), 100% -> 115px (|1⟩)
-            const yPos = -115 + (beta * beta) * 230;
-            indicator.style.transform = `translateY(${yPos}px)`;
-        }
-    },
-    
-    // ... (restante da lógica do App, como o fetchApiData, devidamente modularizado)
-};
-
-// Adapte a chamada init para o novo formato
 document.addEventListener('DOMContentLoaded', () => {
-    // ... (roteamento antigo que chama App.pages.initHomePage(), etc.)
+
+    // LÓGICA PARA A PÁGINA INICIAL (index.html)
+    const canvas = document.getElementById('particles-js');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        // Propriedades das partículas
+        const particleProps = {
+            count: 100,
+            radius: 2,
+            color: 'rgba(88, 166, 255, 0.7)',
+            lineColor: 'rgba(88, 166, 255, 0.15)',
+            speed: 0.5,
+            lineDistance: 150
+        };
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            if (numberOfParticles > particleProps.count) numberOfParticles = particleProps.count;
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * particleProps.radius) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * particleProps.speed) - (particleProps.speed / 2);
+                let directionY = (Math.random() * particleProps.speed) - (particleProps.speed / 2);
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, particleProps.color));
+            }
+        }
+
+        function connect() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                        ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7) && distance < particleProps.lineDistance * particleProps.lineDistance) {
+                        ctx.strokeStyle = particleProps.lineColor;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+    }
+
+
+    // LÓGICA PARA A PÁGINA DE DOCUMENTAÇÃO (docs.html)
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        // Funcionalidade do Menu Mobile
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            // Ocultamente, pode-se adicionar uma classe ao body para travar o scroll do conteúdo principal
+        });
+
+        // Fechar sidebar ao clicar em um link (para mobile)
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+
+        // Animação de Scroll para as seções
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        contentSections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+
+        // Destaque do link ativo na sidebar com base na rolagem
+        const activeLinkObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.sidebar-link[href="#${id}"]`);
+
+                    sidebarLinks.forEach(link => link.classList.remove('active'));
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, { rootMargin: '-30% 0px -70% 0px' });
+
+        contentSections.forEach(section => {
+            activeLinkObserver.observe(section);
+        });
+    }
+
 });
