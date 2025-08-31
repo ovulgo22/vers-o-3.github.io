@@ -1,86 +1,70 @@
-# Portfólio Vivo V3.0
+# Clone da Interface Apple TV+ (Estudo de Front-end)
 
-![Website Status](https://img.shields.io/website?down_message=offline&label=portfolio&style=for-the-badge&up_message=online&url=https%3A%2F%2FSEU-USUARIO.github.io%2F)
-![License](https://img.shields.io/badge/license-MIT-58a6ff?style=for-the-badge)
+![Demonstração do Site](https://user-images.githubusercontent.com/your-username/your-repo/assets/screenshot.jpg) ## 📜 Sobre o Projeto
 
-Este é o código-fonte do meu Portfólio Vivo, um dashboard pessoal e profissional que se atualiza em tempo real. Construído com uma arquitetura de front-end moderna, este projeto vai além de uma simples vitrine, atuando como um reflexo dinâmico da minha atividade e evolução como desenvolvedor.
+Este projeto é uma recriação fiel da interface de usuário do serviço de streaming Apple TV+, desenvolvido como um estudo aprofundado de arquitetura de front-end, performance e design. Foi construído utilizando exclusivamente **HTML5, CSS3 e JavaScript (ES6+)**, sem o uso de frameworks ou bibliotecas externas.
 
-**[➡️ Acesse a versão ao vivo aqui](https://SEU-USUARIO.github.io/)**
+O objetivo principal foi aplicar princípios de engenharia de software para criar uma experiência de usuário fluida, responsiva e visualmente impecável, seguindo a estética minimalista e premium da Apple.
 
----
+## ✨ Princípios e Tecnologias Aplicadas
 
-### Preview
+O desenvolvimento foi guiado por um conjunto de disciplinas, emulando uma equipe de especialistas:
 
-*Aqui é um ótimo lugar para você adicionar uma captura de tela (screenshot) do seu site depois de publicado. Isso aumenta drasticamente o apelo visual para quem visita o repositório.*
+1.  **🏛️ Arquitetura de Software:**
+    * Estrutura de arquivos modular e semântica.
+    * Metodologia BEM-like com Variáveis CSS (Design Tokens).
+    * JavaScript modularizado por funcionalidade (`carousel.js`, `animations.js`).
 
-![Placeholder para Screenshot do Portfólio]
+2.  **📐 UX, Geometria e Matemática:**
+    * Layouts e espaçamentos baseados em escalas geométricas para harmonia visual.
+    * Animações com curvas `cubic-bezier` matemáticas para transições naturais e orgânicas.
 
----
+3.  **🎨 UI e Performance Visual:**
+    * **100% Code-Based:** Nenhum arquivo de imagem (`.png`, `.jpg`). Todos os elementos visuais, incluindo ícones, foram criados com CSS e um sprite SVG.
+    * Design responsivo com a abordagem **Mobile-First**.
+    * Foco em tipografia, contraste e acessibilidade.
 
-## ✨ Funcionalidades Principais
+4.  **⚡ Performance:**
+    * Carregamento assíncrono de scripts com `defer`.
+    * Uso do `IntersectionObserver` para animações ativadas por scroll, evitando sobrecarga na thread principal.
+    * Minimização de manipulações do DOM.
 
-* **Dashboard de Atividade Real:** Integração com a **WakaTime** para exibir um gráfico das linguagens de programação mais usadas nos últimos 7 dias.
-* **Conteúdo Dinâmico:** Projetos e artigos são carregados em tempo real via APIs do **GitHub** e **Dev.to**.
-* **Sistema de Kudos (Guestbook):** Permite que visitantes deixem recados públicos, demonstrando capacidade de integração com um backend (simulado, com hooks para uma implementação real com Funções Serverless).
-* **Personalização e Interatividade:**
-    * **Spotify:** Exibe a última música ouvida, adicionando um toque pessoal.
-    * **Modais Interativos:** A Jornada Profissional e o Setup de Ferramentas possuem detalhes adicionais que aparecem em modais ao serem clicados.
-    * **Easter Egg (Konami Code):** Uma surpresa oculta (`↑↑↓↓←→←→BA`) para os curiosos.
-* **Interface Profissional:**
-    * **Paleta de Comandos (`Ctrl+K`):** Navegação rápida e execução de ações.
-    * **Tema Dual (Light/Dark):** Com persistência e detecção automática de preferência.
+5.  **🌐 SEO e Acessibilidade:**
+    * HTML semântico (`<header>`, `<main>`, `<section>`).
+    * Meta tags otimizadas para SEO e compartilhamento social (Open Graph).
+    * Uso de atributos `aria-*` para navegação acessível.
 
-## 🏛️ Filosofia e Arquitetura do Projeto
+## 🚀 Como Executar
 
-1.  **Configuração Centralizada:** Um arquivo `config.js` atua como um "painel de controle", permitindo fácil personalização e gerenciamento de features.
-2.  **Vanilla Stack:** Uso de HTML semântico, CSS moderno e JavaScript puro (ES6+) para máxima performance e controle.
-3.  **Separação de Responsabilidades (SoC):** O código é dividido em 8 módulos com responsabilidades únicas, facilitando a manutenção.
-4.  **Performance-First:** Uso da `IntersectionObserver` API, ausência de frameworks pesados e um sistema de ícones em SVG-in-JS.
+Como este é um projeto de front-end puro, não há necessidade de build steps ou instalações.
 
-## 📁 Estrutura de Arquivos
+1.  Clone o repositório:
+    ```bash
+    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
+    ```
+2.  Abra o arquivo `index.html` diretamente no seu navegador de preferência.
 
-```
+Ou simplesmente acesse a versão publicada no GitHub Pages (se aplicável).
 
-.
-├── 📄 index.html      \# A estrutura e o conteúdo (O Esqueleto)
-├── 🎨 style.css       \# O design visual e layout (A Pele)
-├── ✨ animations.css  \# As transições e animações (O Movimento)
-├── ⚙️ config.js       \# O painel de controle central (As Regras)
-├── 💎 icons.js        \# O banco de ícones SVG (Os Detalhes)
-├── 🌐 api.js          \# O módulo de busca de dados (Os Dados)
-└── 🧠 script.js       \# A lógica e interatividade (O Cérebro)
-└── 📖 README.md       \# A documentação (O Manual)
+## 🗂️ Estrutura de Arquivos
 
 ```
-
-## 🚀 Como Usar e Customizar
-
-Para tornar este portfólio seu, siga os passos:
-
-### 1. Configuração Central (O Passo Mais Importante)
-
-Abra o arquivo **`config.js`** e personalize os seguintes campos:
-
-* **`user.github`**: Seu nome de usuário do GitHub.
-* **`user.devto`**: Seu nome de usuário do Dev.to.
-* **`user.wakatime_json_url`**: Entre no seu dashboard do WakaTime, habilite o compartilhamento e copie o link **JSON** das suas estatísticas.
-* **`features`**: Você pode desativar (`false`) funcionalidades como o Guestbook ou Spotify se não quiser usá-las.
-* **`api.spotify_endpoint` / `api.guestbook_api`**: **Importante:** Estas funcionalidades precisam de um backend (Funções Serverless na Vercel, Netlify, etc.) para funcionar de verdade. O código atual **simula** o funcionamento. Para torná-lo real, você precisará criar essas funções e colocar os URLs aqui.
-
-### 2. Personalize o Conteúdo
-
-* **`index.html`**: Altere os textos (seu nome, sua jornada, seu setup, etc.).
-* **`script.js`**: Na seção `modalContent`, edite os textos que aparecem nos pop-ups da sua jornada e ferramentas. Na seção `commands` da Paleta de Comandos, atualize o link do seu repositório GitHub.
-
-### 3. Implante no GitHub Pages
-
-* Crie um repositório no GitHub chamado `SEU-USUARIO.github.io`.
-* Envie todos os 8 arquivos para este repositório.
-* Em `Settings > Pages`, configure a fonte de deploy para a branch `main`.
-* Seu site estará no ar em poucos minutos.
-
-## 📜 Licença
-
-Este projeto é distribuído sob a licença MIT.
+/
+|-- index.html              # Estrutura principal
+|-- css/                    # Estilos
+|   |-- reset.css           # Normalização de estilos
+|   |-- variables.css       # Design Tokens
+|   |-- style.css           # Estilos de layout e componentes
+|   `-- animations.css      # Animações complexas
+|-- js/                     # Scripts
+|   |-- carousel.js         # Lógica do carrossel
+|   |-- animations.js       # Lógica de animação no scroll
+|   `-- main.js             # Script principal e orquestrador
+|-- assets/
+|   `-- icons.svg           # Sprite de ícones vetoriais
+`-- README.md               # Este arquivo
+```
 
 ---
+
+Feito com precisão e paixão por engenharia de software.
