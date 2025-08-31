@@ -6,22 +6,27 @@
     <meta name="description" content="Um portal educacional sobre Inteligência Artificial e Computação Quântica.">
     <title>Fronteiras da Computação | IA & Quântica</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body id="page-home">
 
     <canvas id="hero-animation"></canvas>
 
-    <header class="main-header">
+    <header class="site-header">
         <div class="container">
             <a href="index.html" class="logo-link" aria-label="Página Inicial">
                 <img src="logo.svg" alt="Logotipo Fronteiras.dev">
                 <span>Fronteiras.dev</span>
             </a>
-            <nav>
-                <a href="docs.html" class="nav-link">Acessar Documentação</a>
+            <nav class="main-nav">
+                <a href="docs.html">Documentação</a>
+                <a href="timeline.html">Linha do Tempo</a>
+                <a href="glossary.html">Glossário</a>
+                <a href="tools.html">Ferramentas</a>
+                <a href="playground.html" class="nav-highlight">Playground</a>
             </nav>
         </div>
     </header>
@@ -35,13 +40,7 @@
             </div>
         </section>
     </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2025 Fronteiras.dev - Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
