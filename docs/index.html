@@ -3,151 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Clone Apple TV+ | Um Estudo de Interface e Performance</title>
-    <meta name="description" content="Um clone da interface da Apple TV+ construído com HTML, CSS e JavaScript puro, focado em performance, animação e arquitetura de código.">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; font-src 'self';">
-
-    <meta property="og:title" content="Clone Apple TV+">
-    <meta property="og:description" content="Um estudo de interface e performance inspirado na Apple TV+.">
-    <meta property="og:type" content="website">
-
-    <link rel="stylesheet" href="css/reset.css">
+    <title>Pitchutcha TV+</title>
+    <meta name="description" content="Um universo de entretenimento. Descubra filmes e séries originais, criados com base em princípios de design e engenharia de software.">
+    
     <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/main.css">
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
-
-    <script src="js/carousel.js" defer></script>
-    <script src="js/animations.js" defer></script>
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js" type="module" defer></script>
 </head>
 <body>
-
-    <div style="display: none;">
-        <include src="assets/icons.svg"></include>
-    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+        <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></symbol>
+    </svg>
 
     <header class="main-header">
-        <div class="header-container">
-            <div class="logo">
-                <svg class="icon icon-logo" aria-label="Logo Apple TV+"><use xlink:href="#icon-apple-tv-plus"></use></svg>
-            </div>
-            <nav class="main-nav">
-                <a href="#" class="nav-link active">Início</a>
-                <a href="#" class="nav-link">Séries</a>
-                <a href="#" class="nav-link">Filmes</a>
-                <a href="#" class="nav-link">Infantil</a>
-            </nav>
-            <div class="header-actions">
-                <button class="icon-button" aria-label="Buscar">
-                    <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
-                </button>
-                <button class="sign-in-button">Fazer Login</button>
-            </div>
-        </div>
+        <div class="logo">Pitchutcha <span>TV+</span></div>
+        <nav>
+            <a href="#" class="nav-link active">Início</a>
+            <a href="#" class="nav-link">Séries</a>
+            <a href="#" class="nav-link">Filmes</a>
+        </nav>
     </header>
 
     <main>
-        <section class="hero-section" aria-labelledby="hero-title">
-            <div class="hero-background">
-                </div>
+        <section class="hero-section">
             <div class="hero-content">
-                <h1 id="hero-title" class="hero-title animate-on-load">Foundation</h1>
-                <p class="hero-subtitle animate-on-load">Baseado na premiada série de livros de Isaac Asimov.</p>
-                <div class="hero-actions animate-on-load">
-                    <button class="cta-button">
-                        <svg class="icon icon-play"><use xlink:href="#icon-play"></use></svg>
-                        <span>Assistir Agora</span>
+                <h1 class="hero-title">Odisseia Quântica</h1>
+                <p class="hero-description">Uma jornada através do tecido da realidade, onde a matemática encontra a alma. Uma produção original Pitchutcha TV+.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary">
+                        <svg class="icon"><use xlink:href="#icon-play"></use></svg>
+                        Assistir Agora
                     </button>
-                    <button class="secondary-button">Adicionar à Lista</button>
+                    <button class="btn btn-secondary">
+                        <svg class="icon"><use xlink:href="#icon-plus"></use></svg>
+                        Adicionar à Lista
+                    </button>
                 </div>
             </div>
         </section>
 
-        <section class="content-carousel" id="continue-watching" aria-labelledby="carousel-title-1">
-            <div class="carousel-header">
-                <h2 id="carousel-title-1" class="carousel-title">Continue Assistindo</h2>
-                <div class="carousel-navigation">
-                    <button class="nav-button prev" aria-label="Anterior" disabled>
-                        <svg class="icon icon-arrow"><use xlink:href="#icon-arrow-left"></use></svg>
-                    </button>
-                    <button class="nav-button next" aria-label="Próximo">
-                        <svg class="icon icon-arrow"><use xlink:href="#icon-arrow-right"></use></svg>
-                    </button>
-                </div>
-            </div>
+        <section class="carousel-section" id="originals-carousel">
+            <h2 class="section-title">Originais Pitchutcha+</h2>
             <div class="carousel-container">
                 <div class="carousel-track">
-                    <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #2c3e50, #3498db);"></div>
-                        <div class="card-progress-bar"><div class="progress" style="width: 75%;"></div></div>
-                        <h3 class="card-title">Severance</h3>
-                    </article>
-                    <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #8e44ad, #e74c3c);"></div>
-                        <div class="card-progress-bar"><div class="progress" style="width: 30%;"></div></div>
-                        <h3 class="card-title">Ted Lasso</h3>
-                    </article>
-                    <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #16a085, #f1c40f);"></div>
-                        <h3 class="card-title">For All Mankind</h3>
-                    </article>
-                    <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #d35400, #c0392b);"></div>
-                        <h3 class="card-title">The Morning Show</h3>
-                    </article>
-                     <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #1abc9c, #3498db);"></div>
-                        <h3 class="card-title">Pachinko</h3>
-                    </article>
-                     <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #9b59b6, #34495e);"></div>
-                        <h3 class="card-title">Silo</h3>
-                    </article>
-                </div>
+                    </div>
+                <button class="carousel-btn prev" aria-label="Conteúdo anterior">
+                    <svg class="icon"><use xlink:href="#icon-chevron-left"></use></svg>
+                </button>
+                <button class="carousel-btn next" aria-label="Próximo conteúdo">
+                    <svg class="icon"><use xlink:href="#icon-chevron-right"></use></svg>
+                </button>
             </div>
         </section>
-
-        <section class="content-carousel" id="featured" aria-labelledby="carousel-title-2">
-             <div class="carousel-header">
-                <h2 id="carousel-title-2" class="carousel-title">Séries em Destaque</h2>
-                <div class="carousel-navigation">
-                    <button class="nav-button prev" aria-label="Anterior" disabled>
-                        <svg class="icon icon-arrow"><use xlink:href="#icon-arrow-left"></use></svg>
-                    </button>
-                    <button class="nav-button next" aria-label="Próximo">
-                        <svg class="icon icon-arrow"><use xlink:href="#icon-arrow-right"></use></svg>
-                    </button>
-                </div>
-            </div>
+        
+        <section class="carousel-section" id="scifi-carousel">
+            <h2 class="section-title">Ficção Científica Geométrica</h2>
             <div class="carousel-container">
                 <div class="carousel-track">
-                    <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #f39c12, #e67e22);"></div>
-                        <h3 class="card-title">Slow Horses</h3>
-                    </article>
-                    <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #27ae60, #2ecc71);"></div>
-                        <h3 class="card-title">Mythic Quest</h3>
-                    </article>
-                    <article class="content-card" tabindex="0">
-                        <div class="card-image-placeholder" style="background: linear-gradient(45deg, #2980b9, #3498db);"></div>
-                        <h3 class="card-title">Trying</h3>
-                    </article>
-                </div>
+                     </div>
+                 <button class="carousel-btn prev" aria-label="Conteúdo anterior">
+                    <svg class="icon"><use xlink:href="#icon-chevron-left"></use></svg>
+                </button>
+                <button class="carousel-btn next" aria-label="Próximo conteúdo">
+                    <svg class="icon"><use xlink:href="#icon-chevron-right"></use></svg>
+                </button>
             </div>
         </section>
     </main>
-
-    <footer class="main-footer">
-        <p>Copyright © 2025 Apple Inc. Todos os direitos reservados.</p>
-        <nav class="footer-nav">
-            <a href="#">Termos de Serviço</a>
-            <a href="#">Política de Privacidade</a>
-        </nav>
-    </footer>
 
 </body>
 </html>
