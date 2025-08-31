@@ -1,152 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Documentação completa sobre os fundamentos e avanços em Inteligência Artificial e Computação Quântica.">
     <title>Documentação | IA & Computação Quântica</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body class="docs-page">
+    <header class="site-header fixed">
+        </header>
 
     <button class="mobile-menu-toggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="sidebar-nav">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-    </button>
+        </button>
 
     <aside class="sidebar" id="sidebar-nav">
-        <div class="sidebar-header">
-            <a href="index.html" class="logo-link" aria-label="Página Inicial">
-                <img src="logo.svg" alt="Logotipo Fronteiras.dev">
-                <span>Fronteiras.dev</span>
-            </a>
-        </div>
         <nav class="sidebar-nav">
             <ul>
                 <li class="nav-section-title">Inteligência Artificial</li>
                 <li><a href="#intro-ia" class="sidebar-link">Introdução à IA</a></li>
                 <li><a href="#machine-learning" class="sidebar-link">Machine Learning</a></li>
                 <li><a href="#deep-learning" class="sidebar-link">Deep Learning</a></li>
-                <li><a href="#deploy-api" class="sidebar-link">Deploy e Integração de APIs</a></li>
+                <li><a href="#modelos-generativos" class="sidebar-link">Modelos Generativos (LLMs)</a></li>
+                <li><a href="#mlops" class="sidebar-link">IA em Produção (MLOps)</a></li>
                 <li><a href="#etica-futuro" class="sidebar-link">Ética e Futuro</a></li>
             </ul>
             <ul>
                 <li class="nav-section-title">Computação Quântica</li>
                 <li><a href="#intro-cq" class="sidebar-link">O que é C. Quântica?</a></li>
                 <li><a href="#qubits" class="sidebar-link">Qubits e Superposição</a></li>
-                <li><a href="#emaranhamento" class="sidebar-link">Emaranhamento Quântico</a></li>
                 <li><a href="#algoritmos" class="sidebar-link">Algoritmos Quânticos</a></li>
-                <li><a href="#aplicacoes-cq" class="sidebar-link">Aplicações Práticas</a></li>
-            </ul>
-            <ul>
-                <li class="nav-section-title">Recursos</li>
-                <li><a href="#recursos" class="sidebar-link">Recursos Adicionais</a></li>
+                <li><a href="#hardware-cq" class="sidebar-link">Hardware Quântico</a></li>
+                <li><a href="#pqc" class="sidebar-link">Criptografia Pós-Quântica</a></li>
             </ul>
         </nav>
     </aside>
 
     <main class="content">
-        <article class="content-section" id="intro-ia">
-            <h2>Introdução à Inteligência Artificial</h2>
-            <p>Inteligência Artificial (IA) é um campo da ciência da computação dedicado a criar sistemas capazes de realizar tarefas que normalmente exigiriam inteligência humana. Isso inclui aprendizado, raciocínio, resolução de problemas, percepção e uso da linguagem.</p>
-            <blockquote>"A ciência e a engenharia de fazer máquinas inteligentes, especialmente programas de computador inteligentes." - John McCarthy</blockquote>
-            <p>A IA se divide em duas categorias principais: <strong>IA Fraca (Narrow AI)</strong>, que é projetada para uma tarefa específica (ex: assistentes de voz), e <strong>IA Forte (General AI)</strong>, um tipo teórico de IA que teria a capacidade de entender, aprender e aplicar seu conhecimento em uma ampla gama de tarefas, de forma análoga a um ser humano.</p>
+        <article class="content-section" id="modelos-generativos">
+            <h2>Modelos Generativos (GANs & LLMs)</h2>
+            <p>A fronteira da IA hoje é dominada por modelos generativos. Large Language Models (LLMs) como o GPT são capazes de entender e gerar texto com fluidez humana. Generative Adversarial Networks (GANs) podem criar imagens, músicas e outros dados sintéticos realistas.</p>
         </article>
         
-        <article class="content-section" id="machine-learning">
-            <h2>Machine Learning</h2>
-            <p>Machine Learning (ML) é um subcampo da IA que foca no desenvolvimento de algoritmos que permitem que computadores aprendam a partir de dados, sem serem explicitamente programados. O processo geralmente envolve treinar um modelo com um grande conjunto de dados para que ele possa fazer previsões ou tomar decisões.</p>
-             <div class="callout-info">
-                <strong>Tipos de Aprendizado:</strong> Os principais paradigmas de ML são o Aprendizado Supervisionado (dados rotulados), Não Supervisionado (dados não rotulados) e por Reforço (aprendizado através de recompensas e punições).
-            </div>
-        </article>
-
-        <article class="content-section" id="deep-learning">
-            <h2>Deep Learning</h2>
-            <p>Deep Learning é um subcampo do Machine Learning baseado em Redes Neurais Artificiais com muitas camadas (daí o termo "profundo"). Essas redes, inspiradas no cérebro humano, são capazes de aprender padrões complexos em grandes volumes de dados, sendo a tecnologia por trás de avanços em reconhecimento de imagem, processamento de linguagem natural e muito mais.</p>
-            <img src="https://via.placeholder.com/800x400.png/161b22/8B5CF6?text=Arquitetura+de+Rede+Neural+Profunda" alt="Diagrama de uma Rede Neural Profunda" class="content-image">
-        </article>
-
-        <article class="content-section" id="deploy-api">
-            <h2>Deploy e Integração de APIs</h2>
-            <p>Um modelo de IA treinado só gera valor quando é colocado em produção (deploy) e pode ser consumido por outras aplicações. Isso é comumente feito através de uma <strong>API (Application Programming Interface)</strong>.</p>
-            <p>Sistemas modernos encapsulam modelos de IA em contêineres (como Docker) e os expõem como um serviço web. Uma aplicação front-end, por exemplo, pode enviar dados (uma imagem, um texto) para a API e receber a predição do modelo como resposta.</p>
-            
-            <div class="integrated-system-demo">
-                <h3>Exemplo: Simulação de Sistema Integrado</h3>
-                <p>Faça uma pergunta ao nosso modelo de IA simulado para ver como uma API funciona.</p>
-                <input type="text" id="api-question-input" placeholder="Ex: Qual o futuro da IA?">
-                <button id="api-submit-btn">Enviar Consulta</button>
-                <div class="api-response" id="api-response-output">
-                    <p>Aguardando sua pergunta...</p>
-                </div>
-            </div>
-        </article>
-
-        <article class="content-section" id="etica-futuro">
-            <h2>Ética e Futuro</h2>
-            <p>O avanço rápido da IA levanta questões éticas cruciais, incluindo viés algorítmico, privacidade de dados, desemprego tecnológico e o desenvolvimento de sistemas autônomos. A discussão sobre uma regulamentação responsável e o uso ético da IA é fundamental para garantir que seus benefícios sejam compartilhados por toda a sociedade.</p>
-        </article>
-
-        <hr class="section-divider">
-
-        <article class="content-section" id="intro-cq">
-            <h2>O que é Computação Quântica?</h2>
-            <p>A computação quântica é um paradigma de computação radicalmente novo que utiliza os princípios da mecânica quântica para processar informações. Diferente dos computadores clássicos que usam bits (0 ou 1), os computadores quânticos usam <strong>qubits</strong>.</p>
-        </article>
-
-        <article class="content-section" id="qubits">
-            <h2>Qubits e Superposição</h2>
-            <p>Um qubit pode existir em uma combinação de ambos os estados 0 e 1 simultaneamente, um fenômeno conhecido como <strong>superposição</strong>. Isso permite que computadores quânticos explorem um espaço computacional vastamente maior.</p>
-            <p>A superposição de um qubit é matematicamente representada na Esfera de Bloch como: <span class="latex-style">|ψ⟩ = α|0⟩ + β|1⟩</span>, onde <span class="latex-style">|α|² + |β|² = 1</span>.</p>
-            <img src="https://via.placeholder.com/800x400.png/161b22/8B5CF6?text=Esfera+de+Bloch+representando+um+Qubit" alt="Esfera de Bloch" class="content-image">
-        </article>
-
-        <article class="content-section" id="emaranhamento">
-            <h2>Emaranhamento Quântico</h2>
-            <p>O <strong>emaranhamento</strong> é um dos conceitos mais intrigantes da mecânica quântica. Quando dois qubits estão emaranhados, seus destinos estão interligados. Medir o estado de um qubit instantaneamente influencia o estado do outro, não importa a distância que os separe. Einstein descreveu isso como "ação fantasmagórica à distância".</p>
-        </article>
-
-        <article class="content-section" id="algoritmos">
-            <h2>Algoritmos Quânticos</h2>
-            <p>Algoritmos quânticos são projetados para resolver problemas específicos que são intratáveis para computadores clássicos. Os mais notáveis incluem:</p>
-            <ul>
-                <li><strong>Algoritmo de Shor:</strong> Capaz de fatorar grandes números exponencialmente mais rápido, ameaçando a criptografia atual.</li>
-                <li><strong>Algoritmo de Grover:</strong> Oferece uma aceleração quadrática na busca de dados não estruturados.</li>
-            </ul>
+        <article class="content-section" id="mlops">
+            <h2>IA em Produção (MLOps)</h2>
+            <p>MLOps (Machine Learning Operations) é uma disciplina que combina ML, DevOps e Engenharia de Dados para implantar e manter modelos de ML em produção de forma confiável e eficiente. Envolve automação, monitoramento e governança de todo o ciclo de vida do modelo.</p>
         </article>
         
-        <article class="content-section" id="aplicacoes-cq">
-            <h2>Aplicações Práticas</h2>
-             <p>A computação quântica promete revolucionar diversas áreas:</p>
-             <div class="callout-warning">
-                <strong>Estado Atual:</strong> A tecnologia ainda está em sua infância e é altamente suscetível a erros (decoerência). A maioria das aplicações ainda é teórica.
-            </div>
-            <ul>
-                <li><strong>Medicina:</strong> Simulação de moléculas para a descoberta de novos medicamentos e tratamentos.</li>
-                <li><strong>Ciência de Materiais:</strong> Criação de novos materiais com propriedades desejadas, como supercondutores.</li>
-                <li><strong>Finanças:</strong> Otimização de portfólios de investimento e análise de risco complexa.</li>
-                <li><strong>Inteligência Artificial:</strong> Aceleração de algoritmos de machine learning.</li>
-            </ul>
+         <article class="content-section" id="hardware-cq">
+            <h2>Hardware Quântico: Abordagens Atuais</h2>
+            <p>A construção de computadores quânticos é um desafio imenso. As principais abordagens de hardware incluem qubits supercondutores (usados por Google e IBM), íons aprisionados e qubits fotônicos, cada um com seus próprios prós e contras em termos de estabilidade (coerência) e escalabilidade.</p>
         </article>
 
-        <hr class="section-divider">
-
-        <article class="content-section" id="recursos">
-            <h2>Recursos Adicionais</h2>
-            <p>Aprofunde seu conhecimento com nossos whitepapers e guias técnicos. Estes documentos oferecem uma análise detalhada dos tópicos abordados.</p>
-            <ul class="resource-list">
-                <li><a href="#" download="Whitepaper_IA_Explicada.pdf">Baixar PDF: Whitepaper - IA Explicada</a></li>
-                <li><a href="#" download="Guia_Fundamentos_Computacao_Quantica.pdf">Baixar PDF: Guia de Fundamentos da Computação Quântica</a></li>
-                <li><a href="#" download="Relatorio_Etica_IA_2025.pdf">Baixar PDF: Relatório - Ética em IA 2025</a></li>
-            </ul>
+        <article class="content-section" id="pqc">
+            <h2>Criptografia Pós-Quântica (PQC)</h2>
+            <p>Como o Algoritmo de Shor ameaça quebrar a criptografia atual, pesquisadores estão desenvolvendo novos algoritmos criptográficos que sejam seguros contra ataques de computadores quânticos. Esta área, conhecida como Criptografia Pós-Quântica, é vital para a segurança da informação no futuro.</p>
         </article>
-
-        <footer class="content-footer">
-            <p>&copy; 2025 Fronteiras.dev</p>
-        </footer>
     </main>
     
     <script src="script.js"></script>
