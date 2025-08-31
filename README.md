@@ -1,11 +1,12 @@
-# Portfólio de Arquiteto de Software & Desenvolvedor Full-stack
+```markdown
+# Portfólio Dinâmico de Arquiteto de Software & Desenvolvedor Full-stack
 
 ![Website Status](https://img.shields.io/website?down_message=offline&label=portfolio&style=for-the-badge&up_message=online&url=https%3A%2F%2FSEU-USUARIO.github.io%2F)
 ![License](https://img.shields.io/badge/license-MIT-58a6ff?style=for-the-badge)
 
-Este é o código-fonte do meu portfólio pessoal, um site estático de última geração construído com foco absoluto em performance, design limpo e engenharia de front-end moderna.
+Este é o código-fonte do meu portfólio pessoal V2.0, um site estático de última geração construído com foco absoluto em performance, interatividade e integração contínua de dados.
 
-**[➡️ Acesse a versão ao vivo aqui](https://ovulgo22.github.io/vers-o-3.github.io/)**
+**[➡️ Acesse a versão ao vivo aqui](https://SEU-USUARIO.github.io/)**
 
 ---
 
@@ -17,19 +18,24 @@ Este é o código-fonte do meu portfólio pessoal, um site estático de última 
 
 ---
 
+## ✨ Funcionalidades Principais
+
+* **Conteúdo Dinâmico via API:** Projetos e artigos são carregados em tempo real a partir das APIs do **GitHub** e **Dev.to**, mantendo o portfólio sempre atualizado sem esforço manual.
+* **Paleta de Comandos (`Ctrl+K`):** Uma interface de navegação rápida inspirada em ferramentas de desenvolvedor (VS Code, Slack) para navegar entre seções e acessar links externos.
+* **Tema Dual (Light/Dark):** Alternância de tema com persistência no `localStorage` e detecção automática da preferência do sistema operacional.
+* **Design Responsivo e Moderno:** Interface inspirada na clareza do GitHub Docs, totalmente adaptável para desktops, tablets e celulares.
+* **Performance Extrema:** Construído sem frameworks, com SVGs gerados por código e zero dependências de imagem, garantindo um carregamento quase instantâneo.
+
 ## 🏛️ Filosofia e Arquitetura do Projeto
 
-Este projeto foi construído do zero, sem frameworks ou bibliotecas pesadas, para demonstrar o domínio dos fundamentos da web. A arquitetura foi guiada pelos seguintes princípios:
+A arquitetura foi guiada pelos seguintes princípios:
 
-1.  **Performance em Primeiro Lugar:** O site é estático, servido via GitHub Pages, o que garante velocidade de carregamento e segurança. Não há builds, dependências ou tempo de espera.
-2.  **Zero Arquivos de Imagem:** Todos os ícones são SVGs gerados dinamicamente via JavaScript. Isso elimina requisições HTTP para imagens, resultando em um carregamento quase instantâneo e renderização vetorial perfeita em qualquer resolução de tela.
-3.  **Engenharia de Estilo Moderna:** O design é totalmente controlado por CSS moderno, utilizando Variáveis (Custom Properties) para um sistema de temas (Dark/Light) limpo e de fácil manutenção. O layout é construído com Grid e Flexbox.
-4.  **JavaScript com Propósito e Performance:** O JavaScript é utilizado apenas para interatividade real, como a troca de tema e animações de scroll. A API `IntersectionObserver` é usada para garantir que essas operações tenham impacto mínimo na performance.
-5.  **Código Limpo e Organizado:** A separação de responsabilidades é clara entre os cinco arquivos principais, tornando o projeto legível e fácil de manter.
+1.  **Vanilla Stack:** Uso de HTML semântico, CSS moderno (Grid, Flexbox, Variáveis) e JavaScript puro (ES6+) para demonstrar o domínio dos fundamentos da web.
+2.  **Separação de Responsabilidades (SoC):** O código é dividido em módulos com responsabilidades únicas, facilitando a manutenção e a escalabilidade.
+3.  **Performance-First:** O uso da `IntersectionObserver` API para animações e scrollspy garante uma experiência fluida sem sobrecarregar o navegador.
+4.  **Código como Asset:** Todos os ícones são definidos como SVGs em JavaScript, eliminando requisições HTTP e permitindo manipulação total via CSS.
 
 ## 📁 Estrutura de Arquivos
-
-O projeto é composto por 5 arquivos principais, cada um com uma responsabilidade única:
 
 ```
 
@@ -38,28 +44,34 @@ O projeto é composto por 5 arquivos principais, cada um com uma responsabilidad
 ├── 🎨 style.css       \# O design visual e layout estático (A Pele)
 ├── ✨ animations.css  \# As transições e animações sutis (O Movimento)
 ├── 💎 icons.js        \# O banco de ícones SVG e o injetor dinâmico (Os Detalhes)
-└── 🧠 script.js       \# A lógica, interatividade e performance (O Cérebro)
+├── 🌐 api.js          \# O módulo de busca de dados externos (Os Dados)
+└── 🧠 script.js       \# A lógica, interatividade e estado (O Cérebro)
 
 ```
 
 ## 🚀 Como Usar e Customizar
 
-Este repositório serve como um template. Para torná-lo seu, siga os passos:
+Para tornar este portfólio seu, siga os passos:
 
-1.  **Clone ou Faça um Fork deste Repositório:** Comece criando uma cópia para a sua conta do GitHub.
-2.  **Personalize o Conteúdo (`index.html`):**
+1.  **Personalize os Dados (`api.js`):**
+    * Abra o arquivo `api.js`.
+    * Altere as constantes `GITHUB_USERNAME` e `DEVTO_USERNAME` para os seus nomes de usuário.
+
+2.  **Personalize os Links (`script.js`):**
+    * Abra o arquivo `script.js`.
+    * Na constante `commands`, encontre a ação para "Ver Código Fonte no GitHub" e atualize o link para o seu repositório.
+
+3.  **Personalize o Conteúdo (`index.html`):**
     * Altere o título da página na tag `<title>`.
-    * Substitua `[Seu Nome]` em todo o arquivo pelo seu nome.
-    * Atualize os textos nas seções "Sobre", "Projetos", "Artigos" e "Contato" com suas informações.
-    * Adicione os links corretos para seu GitHub, LinkedIn e Email.
-3.  **Ajuste o Estilo (`style.css`):**
-    * Para mudar a cor de destaque principal, altere o valor da variável `--color-accent` em `:root`. Todo o site se adaptará automaticamente.
+    * Substitua `[Seu Nome]` e outros textos (Jornada, Setup, Contato) com suas informações.
+
 4.  **Implante no GitHub Pages:**
-    * Renomeie o repositório para `SEU-USUARIO.github.io` para publicá-lo como seu site principal.
-    * Vá para `Settings > Pages` e configure a fonte de deploy para a branch `main`.
-    * Seu site estará no ar em poucos minutos.
+    * Crie um repositório no GitHub chamado `SEU-USUARIO.github.io`.
+    * Envie todos os 6 arquivos de código (`index.html`, etc.) e este `README.md` para o repositório.
+    * Em `Settings > Pages`, configure a fonte de deploy para a branch `main`.
+    * Seu site estará no ar em poucos minutos no endereço `https://SEU-USUARIO.github.io`.
 
 ## 📜 Licença
 
-Este projeto é distribuído sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes. Sinta-se à vontade para usar, modificar e distribuir como quiser.
+Este projeto é distribuído sob a licença MIT. Sinta-se à vontade para usar, modificar e distribuir como quiser.
 ```
