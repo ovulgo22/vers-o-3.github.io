@@ -1,42 +1,200 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuantumAI - Explorando as Fronteiras da Computação</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo.svg" type="image/svg+xml">
-</head>
-<body class="home-page">
+    <meta name="description" content="Portfólio de [Seu Nome], Desenvolvedor Full-stack Sênior e Arquiteto de Software. Especialista em criar soluções robustas, escaláveis e de alta performance.">
+    <meta name="author" content="[Seu Nome]">
+    
+    <title>[Seu Nome] | Desenvolvedor Full-stack & Arquiteto de Software</title>
 
-    <canvas id="particles-js"></canvas>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔹</text></svg>">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+
+    <script src="icons.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body class="theme-dark">
 
     <header class="main-header">
-        <div class="container">
-            <a href="index.html" class="logo-link">
-                <img src="logo.svg" alt="QuantumAI Logo" class="logo">
-                <span>QuantumAI</span>
+        <div class="container header-container">
+            <a href="#" class="logo" aria-label="Página Inicial">
+                <span id="logo-icon" class="icon"></span>
+                <span>[Seu Nome]</span>
             </a>
-            <nav>
-                <a href="docs.html" class="nav-link">Acessar Documentação</a>
+            <nav class="main-nav">
+                <a href="#sobre">Sobre</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#artigos">Artigos</a>
+                <a href="#contato">Contato</a>
             </nav>
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-button" aria-label="Alternar tema de cores">
+                    <span id="theme-icon" class="icon"></span>
+                </button>
+                <button id="mobile-menu-toggle" class="icon-button mobile-only" aria-label="Abrir menu de navegação">
+                    <span id="menu-icon" class="icon"></span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <main class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Explorando as Fronteiras da Computação</h1>
-            <p class="hero-subtitle">Uma jornada profunda pela Inteligência Artificial e a Revolução Quântica.</p>
-            <a href="docs.html" class="cta-button">Iniciar Aprendizagem</a>
-        </div>
-    </main>
+    <div class="main-wrapper container">
+        
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <section class="sidebar-section">
+                    <h3 class="sidebar-title">Introdução</h3>
+                    <ul>
+                        <li><a href="#boas-vindas" class="sidebar-link active">Boas-vindas</a></li>
+                        <li><a href="#sobre" class="sidebar-link">Filosofia de Código</a></li>
+                    </ul>
+                </section>
+                <section class="sidebar-section">
+                    <h3 class="sidebar-title">Competências</h3>
+                    <ul>
+                        <li><a href="#arquitetura" class="sidebar-link">Arquitetura e Design</a></li>
+                        <li><a href="#backend" class="sidebar-link">Back-end</a></li>
+                        <li><a href="#frontend" class="sidebar-link">Front-end</a></li>
+                        <li><a href="#devops" class="sidebar-link">Cloud & DevOps</a></li>
+                    </ul>
+                </section>
+                <section class="sidebar-section">
+                    <h3 class="sidebar-title">Portfólio</h3>
+                    <ul>
+                        <li><a href="#projetos" class="sidebar-link">Projetos em Destaque</a></li>
+                        <li><a href="#artigos" class="sidebar-link">Publicações Técnicas</a></li>
+                    </ul>
+                </section>
+                 <section class="sidebar-section">
+                    <h3 class="sidebar-title">Contato</h3>
+                    <ul>
+                        <li><a href="#contato" class="sidebar-link">Conecte-se</a></li>
+                    </ul>
+                </section>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <section id="boas-vindas" class="content-section">
+                <div class="hero">
+                    <h1 class="hero-title">Arquitetura de Software que Impulsiona o Futuro</h1>
+                    <p class="hero-subtitle">Desenvolvedor Full-stack Sênior e Arquiteto de Software transformando problemas complexos em soluções elegantes, escaláveis e de alta performance.</p>
+                </div>
+            </section>
+            
+            <section id="sobre" class="content-section">
+                <h2>Filosofia de Código e Arquitetura</h2>
+                <p>Acredito que software de qualidade é construído sobre dois pilares: arquitetura robusta e código limpo. Minha abordagem é pragmática, focada em Domain-Driven Design (DDD), princípios SOLID e em sistemas que não apenas funcionam, mas são manuteníveis e evoluem com o negócio. A verdadeira senioridade não está em conhecer todas as tecnologias, mas em saber qual aplicar para resolver o problema certo, da forma mais eficiente.</p>
+            </section>
+
+            <section id="arquitetura" class="content-section">
+                <h2>Arquitetura e Design</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">Microsserviços</div>
+                    <div class="skill-card">Serverless</div>
+                    <div class="skill-card">Domain-Driven Design (DDD)</div>
+                    <div class="skill-card">System Design</div>
+                    <div class="skill-card">APIs (REST & GraphQL)</div>
+                    <div class="skill-card">Mensageria & Filas</div>
+                </div>
+            </section>
+
+            <section id="backend" class="content-section">
+                <h2>Back-end</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">Node.js / TypeScript</div>
+                    <div class="skill-card">Go (Golang)</div>
+                    <div class="skill-card">Python</div>
+                    <div class="skill-card">PostgreSQL / MongoDB</div>
+                    <div class="skill-card">Redis</div>
+                    <div class="skill-card">Docker & Kubernetes</div>
+                </div>
+            </section>
+            
+            <section id="frontend" class="content-section">
+                <h2>Front-end</h2>
+                 <div class="skills-grid">
+                    <div class="skill-card">React / Next.js</div>
+                    <div class="skill-card">Vue.js / Nuxt.js</div>
+                    <div class="skill-card">HTML5 & CSS3</div>
+                    <div class="skill-card">State Management</div>
+                    <div class="skill-card">Web Performance</div>
+                    <div class="skill-card">Acessibilidade</div>
+                </div>
+            </section>
+
+            <section id="devops" class="content-section">
+                <h2>Cloud & DevOps</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">AWS / GCP</div>
+                    <div class="skill-card">CI/CD (GitHub Actions)</div>
+                    <div class="skill-card">Terraform (IaC)</div>
+                    <div class="skill-card">Observability</div>
+                </div>
+            </section>
+
+            <section id="projetos" class="content-section">
+                <h2>Projetos em Destaque</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span id="folder-icon" class="icon"></span>
+                            <h3 class="project-title">Plataforma de Orquestração de APIs</h3>
+                        </div>
+                        <p class="project-description">Arquitetura de microsserviços para um sistema de alta concorrência, processando milhões de requisições diárias com baixa latência.</p>
+                        <div class="project-footer">
+                            <span class="project-tech">Go, gRPC, Kubernetes, Kafka</span>
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver código no GitHub" class="icon-button"><span id="github-icon-project" class="icon"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span id="folder-icon-2" class="icon"></span>
+                            <h3 class="project-title">Design System para Fintech</h3>
+                        </div>
+                        <p class="project-description">Criação de um Design System completo em React, garantindo consistência visual e acelerando o desenvolvimento de novas features.</p>
+                        <div class="project-footer">
+                            <span class="project-tech">React, TypeScript, Storybook</span>
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver código no GitHub" class="icon-button"><span id="github-icon-project-2" class="icon"></span></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver demonstração ao vivo" class="icon-button"><span id="external-link-icon" class="icon"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="artigos" class="content-section">
+                <h2>Publicações Técnicas</h2>
+                <p>Compartilhar conhecimento é um pilar do crescimento. Aqui estão alguns artigos que escrevi sobre arquitetura, performance e boas práticas de desenvolvimento.</p>
+                <a href="#" class="article-link">Como o Serverless mudou meu jeito de pensar em escalabilidade</a>
+                 <a href="#" class="article-link">Domain-Driven Design na Prática: Um Guia para Iniciantes</a>
+            </section>
+
+            <section id="contato" class="content-section">
+                <h2>Conecte-se</h2>
+                <p>Estou sempre aberto a discutir novos desafios de tecnologia e arquitetura. Sinta-se à vontade para entrar em contato através das minhas redes profissionais.</p>
+                <div class="contact-links">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="contact-link-item"><span id="github-icon-contact" class="icon"></span> GitHub</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="contact-link-item"><span id="linkedin-icon-contact" class="icon"></span> LinkedIn</a>
+                    <a href="mailto:seuemail@email.com" class="contact-link-item"><span id="mail-icon-contact" class="icon"></span> Email</a>
+                </div>
+            </section>
+
+        </main>
+    </div>
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 QuantumAI. Todos os direitos reservados.</p>
+            <p>&copy; <span id="current-year">2025</span> [Seu Nome]. Construído do zero com paixão por código limpo.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
