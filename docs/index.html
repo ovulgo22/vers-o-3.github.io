@@ -12,9 +12,6 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animations.css">
-
-    <script src="icons.js" defer></script>
-    <script src="api.js" defer></script> <script src="script.js" defer></script>
 </head>
 <body class="theme-dark">
 
@@ -56,7 +53,8 @@
                     </ul>
                 </section>
                 <section class="sidebar-section">
-                    <h3 class="sidebar-title">Carreira</h3> <ul>
+                    <h3 class="sidebar-title">Carreira</h3>
+                    <ul>
                         <li><a href="#jornada" class="sidebar-link">Jornada Profissional</a></li>
                     </ul>
                 </section>
@@ -68,7 +66,8 @@
                     </ul>
                 </section>
                 <section class="sidebar-section">
-                    <h3 class="sidebar-title">Toolbox</h3> <ul>
+                    <h3 class="sidebar-title">Toolbox</h3>
+                     <ul>
                         <li><a href="#competencias" class="sidebar-link">Competências</a></li>
                         <li><a href="#ferramentas" class="sidebar-link">Meu Setup</a></li>
                     </ul>
@@ -142,7 +141,7 @@
                 <h2>Artigos Recentes (Live do Dev.to)</h2>
                 <p>Acredito que conhecimento compartilhado é conhecimento multiplicado. Estes são meus últimos artigos, carregados via API do Dev.to.</p>
                 <div id="devto-articles-container">
-                    <div class="loader">Carregando artigos do Dev.to...</div>
+                     <div class="loader">Carregando artigos do Dev.to...</div>
                 </div>
             </section>
             
@@ -204,7 +203,7 @@
         </div>
     </footer>
     
-    <div id="command-palette" class="command-palette-overlay" hidden>
+    <div id="command-palette" class="command-palette-overlay palette-hidden">
         <div class="command-palette-modal">
             <div class="command-palette-header">
                 <span id="search-icon" class="icon"></span>
@@ -212,9 +211,12 @@
                 <button id="command-palette-close" class="close-button">ESC</button>
             </div>
             <ul id="command-palette-results" class="command-palette-results">
-                </ul>
+            </ul>
         </div>
     </div>
 
+    <script src="icons.js" defer></script>
+    <script src="api.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
