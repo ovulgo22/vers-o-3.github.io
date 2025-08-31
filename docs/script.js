@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ----------------------------------------------------
-    // FUNÇÃO 1: Animação de Partículas para index.html
-    // ----------------------------------------------------
+    /**
+     * MÓDULO 1: Animação de Partículas para a Landing Page (index.html)
+     * Cria um fundo interativo com partículas conectadas.
+     */
     const initParticleAnimation = () => {
         const canvas = document.getElementById('hero-animation');
         if (!canvas) return;
@@ -10,28 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
-        let particlesArray;
-
-        const mouse = {
-            x: null,
-            y: null,
-            radius: (canvas.height / 120) * (canvas.width / 120)
-        };
-
-        window.addEventListener('mousemove', (event) => {
-            mouse.x = event.x;
-            mouse.y = event.y;
-        });
+        let particlesArray = [];
 
         class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-                this.color = color;
+            constructor(x, y, dirX, dirY, size) {
+                this.x = x; this.y = y; this.dirX = dirX; this.dirY = dirY; this.size = size;
             }
             draw() {
                 ctx.beginPath();
@@ -40,41 +24,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fill();
             }
             update() {
-                if (this.x > canvas.width || this.x < 0) {
-                    this.directionX = -this.directionX;
-                }
-                if (this.y > canvas.height || this.y < 0) {
-                    this.directionY = -this.directionY;
-                }
-                this.x += this.directionX;
-                this.y += this.directionY;
+                if (this.x > canvas.width || this.x < 0) this.dirX = -this.dirX;
+                if (this.y > canvas.height || this.y < 0) this.dirY = -this.dirY;
+                this.x += this.dirX;
+                this.y += this.dirY;
                 this.draw();
             }
         }
 
         function init() {
             particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            const numberOfParticles = (canvas.height * canvas.width) / 9000;
             for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * .4) - 0.2;
-                let directionY = (Math.random() * .4) - 0.2;
-                let color = '#8B5CF6';
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                const size = (Math.random() * 2) + 1;
+                const x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                const y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                const dirX = (Math.random() * .4) - 0.2;
+                const dirY = (Math.random() * .4) - 0.2;
+                particlesArray.push(new Particle(x, y, dirX, dirY, size));
             }
         }
 
         function connect() {
-            let opacityValue = 1;
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
-                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    const distance = ((particlesArray[a].x - particlesArray[b].x) ** 2) + ((particlesArray[a].y - particlesArray[b].y) ** 2);
                     if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                        opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = `rgba(139, 92, 246, ${opacityValue})`;
+                        const opacity = 1 - (distance / 20000);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${opacity})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -88,59 +65,42 @@ document.addEventListener('DOMContentLoaded', () => {
         function animate() {
             requestAnimationFrame(animate);
             ctx.clearRect(0, 0, innerWidth, innerHeight);
-
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
+            particlesArray.forEach(p => p.update());
             connect();
         }
-
-        window.addEventListener('resize', () => {
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
-            mouse.radius = (canvas.height / 120) * (canvas.width / 120);
-            init();
-        });
-
-        window.addEventListener('mouseout', () => {
-            mouse.x = undefined;
-            mouse.y = undefined;
-        });
-
+        
+        window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; init(); });
         init();
         animate();
     };
 
-    // ----------------------------------------------------
-    // FUNÇÃO 2: Lógica da Página de Documentação
-    // ----------------------------------------------------
+    /**
+     * MÓDULO 2: Funcionalidades da Página de Documentação (docs.html)
+     * Controla o menu mobile, o destaque de link ativo e as animações de scroll.
+     */
     const initDocsPage = () => {
         if (!document.body.classList.contains('docs-page')) return;
 
-        const sidebar = document.querySelector('.sidebar');
+        const sidebar = document.getElementById('sidebar-nav');
         const menuToggle = document.querySelector('.mobile-menu-toggle');
-        const sidebarLinks = document.querySelectorAll('.sidebar-link');
         const contentSections = document.querySelectorAll('.content-section');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
-        // Lógica do Menu Mobile
+        // Lógica do Menu Mobile com acessibilidade
         menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
+            const isOpen = sidebar.classList.toggle('open');
+            menuToggle.setAttribute('aria-expanded', isOpen);
         });
 
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', e => {
             if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('open')) {
                 sidebar.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
             }
         });
 
-        // Lógica de Scroll Ativo na Sidebar
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.3
-        };
-
-        const activeLinkObserver = new IntersectionObserver((entries, observer) => {
+        // Observador para destacar link ativo na sidebar
+        const activeLinkObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
@@ -152,13 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-        }, observerOptions);
+        }, { rootMargin: '0px 0px -70% 0px' });
 
-        contentSections.forEach(section => {
-            activeLinkObserver.observe(section);
-        });
-        
-        // Animação de Fade-in ao rolar
+        contentSections.forEach(section => activeLinkObserver.observe(section));
+
+        // Observador para animação de fade-in das seções
         const scrollObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -168,13 +126,47 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, { threshold: 0.1 });
 
-        contentSections.forEach(section => {
-            scrollObserver.observe(section);
+        contentSections.forEach(section => scrollObserver.observe(section));
+    };
+
+    /**
+     * MÓDULO 3: Simulação de Sistema Integrado (API Demo)
+     * Controla o comportamento do exemplo interativo na página de docs.
+     */
+    const initApiDemo = () => {
+        const submitBtn = document.getElementById('api-submit-btn');
+        const input = document.getElementById('api-question-input');
+        const responseOutput = document.getElementById('api-response-output');
+
+        if (!submitBtn) return;
+
+        submitBtn.addEventListener('click', () => {
+            const question = input.value.trim();
+            if (!question) {
+                responseOutput.innerHTML = `<p style="color: #f7b731;">Por favor, digite uma pergunta.</p>`;
+                return;
+            }
+
+            responseOutput.classList.add('loading');
+            responseOutput.innerHTML = `<p>Processando sua pergunta...</p>`;
+
+            // Simula uma chamada de API com um delay
+            setTimeout(() => {
+                let answer = "Esta é uma resposta padrão. Em um sistema real, a IA processaria sua pergunta e geraria uma resposta única.";
+                if (question.toLowerCase().includes("futuro")) {
+                    answer = "O futuro da IA é promissor, com potencial para avanços em medicina, automação e ciência. No entanto, o desenvolvimento ético é crucial para garantir que a tecnologia beneficie a todos.";
+                } else if (question.toLowerCase().includes("quântica")) {
+                    answer = "A computação quântica tem o potencial de resolver problemas complexos que são intratáveis para computadores clássicos, revolucionando áreas como criptografia e descoberta de novos materiais.";
+                }
+                
+                responseOutput.classList.remove('loading');
+                responseOutput.innerHTML = `<p><strong>Resposta da IA:</strong> ${answer}</p>`;
+            }, 1500);
         });
     };
 
-    // Inicializa as funções apropriadas para a página atual
+    // Inicializa todos os módulos
     initParticleAnimation();
     initDocsPage();
-
+    initApiDemo();
 });
