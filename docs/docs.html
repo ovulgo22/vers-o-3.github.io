@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação | IA & Computação Quântica</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="docs-page">
+
+    <button class="mobile-menu-toggle" aria-label="Abrir menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo-link">
+                <img src="logo.svg" alt="Logotipo do site">
+                <span>Fronteiras.dev</span>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="nav-section-title">Inteligência Artificial</li>
+                <li><a href="#intro-ia" class="sidebar-link">Introdução à IA</a></li>
+                <li><a href="#pesquisas" class="sidebar-link">Pesquisas Científicas</a></li>
+                <li><a href="#matematica-ia" class="sidebar-link">A Matemática da IA</a></li>
+                <li><a href="#machine-learning" class="sidebar-link">Machine Learning</a></li>
+                <li><a href="#deep-learning" class="sidebar-link">Deep Learning</a></li>
+                <li><a href="#etica-futuro" class="sidebar-link">Ética e Futuro</a></li>
+            </ul>
+            <ul>
+                <li class="nav-section-title">Computação Quântica</li>
+                <li><a href="#intro-cq" class="sidebar-link">O que é C. Quântica?</a></li>
+                <li><a href="#qubits" class="sidebar-link">Qubits e Superposição</a></li>
+                <li><a href="#emaranhamento" class="sidebar-link">Emaranhamento Quântico</a></li>
+                <li><a href="#algoritmos" class="sidebar-link">Algoritmos Quânticos</a></li>
+                <li><a href="#hardware" class="sidebar-link">Hardware e Desafios</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <article class="content-section" id="intro-ia">
+            <h2>Introdução à Inteligência Artificial</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.</p>
+            <blockquote>"A ciência e a engenharia de fazer máquinas inteligentes, especialmente programas de computador inteligentes." - John McCarthy</blockquote>
+            <p>Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor.</p>
+        </article>
+
+        <article class="content-section" id="pesquisas">
+            <h2>Pesquisas Científicas</h2>
+            <p>Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.</p>
+            <img src="https://via.placeholder.com/800x400.png/161b22/8B5CF6?text=Diagrama+de+Rede+Neural" alt="Diagrama de Rede Neural" class="content-image">
+            <p>Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales.</p>
+        </article>
+        
+        <article class="content-section" id="matematica-ia">
+            <h2>A Matemática da IA</h2>
+            <p>A base da Inteligência Artificial moderna reside em conceitos matemáticos fundamentais, incluindo Álgebra Linear, Cálculo e Estatística.</p>
+            <h3>Álgebra Linear</h3>
+            <p>Essencial para representar dados como vetores e matrizes, e para operações em redes neurais. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Cálculo</h3>
+            <p>Utilizado no processo de otimização de modelos, como o Gradiente Descendente, para minimizar funções de erro. Cras elementum ultrices diam.</p>
+        </article>
+
+        <article class="content-section" id="machine-learning">
+            <h2>Machine Learning</h2>
+            <p>Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.</p>
+            <pre><code>
+<span class="code-keyword">from</span> sklearn.model_selection <span class="code-keyword">import</span> train_test_split
+<span class="code-keyword">from</span> sklearn.ensemble <span class="code-keyword">import</span> RandomForestClassifier
+
+<span class="code-comment"># Dividir dados em treino e teste</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="code-number">0.3</span>)
+
+<span class="code-comment"># Criar e treinar o modelo</span>
+model = <span class="code-function">RandomForestClassifier</span>(n_estimators=<span class="code-number">100</span>)
+model.<span class="code-function">fit</span>(X_train, y_train)
+            </code></pre>
+        </article>
+
+        <article class="content-section" id="deep-learning">
+            <h2>Deep Learning</h2>
+            <p>Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales.</p>
+        </article>
+
+        <article class="content-section" id="etica-futuro">
+            <h2>Ética e Futuro</h2>
+            <p>Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.</p>
+        </article>
+
+        <article class="content-section" id="intro-cq">
+            <h2>O que é Computação Quântica?</h2>
+            <p>A computação quântica é um tipo de computação que utiliza os fenômenos coletivos da mecânica quântica, como superposição e emaranhamento, para realizar operações em dados. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.</p>
+        </article>
+
+        <article class="content-section" id="qubits">
+            <h2>Qubits e Superposição</h2>
+            <p>Ao contrário dos bits clássicos, que podem ser 0 ou 1, um qubit pode estar em uma superposição de ambos os estados simultaneamente. Isso permite que computadores quânticos processem um número exponencialmente maior de informações.</p>
+            <p>A superposição de um qubit pode ser representada como: $$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$$ onde $|\alpha|^2 + |\beta|^2 = 1$.</p>
+            <img src="https://via.placeholder.com/800x400.png/161b22/8B5CF6?text=Esfera+de+Bloch" alt="Esfera de Bloch representando um Qubit" class="content-image">
+        </article>
+
+        <article class="content-section" id="emaranhamento">
+            <h2>Emaranhamento Quântico</h2>
+            <p>O emaranhamento é um fenômeno quântico no qual dois ou mais qubits se tornam interligados de tal forma que o estado de um afeta instantaneamente o outro, não importa a distância que os separe. Einstein famosamente chamou isso de "ação fantasmagórica à distância".</p>
+        </article>
+
+        <article class="content-section" id="algoritmos">
+            <h2>Algoritmos Quânticos</h2>
+            <p>Algoritmos quânticos são projetados para resolver problemas que são intratáveis para computadores clássicos. Alguns dos mais famosos incluem:</p>
+            <ul>
+                <li><strong>Algoritmo de Shor:</strong> Para fatoração de inteiros, ameaçando a criptografia moderna.</li>
+                <li><strong>Algoritmo de Grover:</strong> Para busca em bancos de dados não ordenados, oferecendo uma aceleração quadrática.</li>
+            </ul>
+        </article>
+
+        <article class="content-section" id="hardware">
+            <h2>Hardware e Desafios</h2>
+            <p>Construir um computador quântico funcional é um desafio monumental. Os qubits são extremamente sensíveis a ruídos do ambiente (decoerência), exigindo temperaturas próximas do zero absoluto e isolamento extremo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.</p>
+        </article>
+
+        <footer class="content-footer">
+            <p>&copy; 2025 Fronteiras.dev</p>
+        </footer>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
