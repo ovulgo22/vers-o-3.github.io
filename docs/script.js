@@ -1,21 +1,14 @@
 /* ==========================================================================
-   ARQUIVO: script.js (VERSÃO FINAL COMPLETA)
+   ARQUIVO: script.js (VERSÃO FINAL REVISADA E REFINADA)
    PROJETO: Pitchutcha TV+
-   ARQUITETURA JS: Modular (Conceitual)
-   - State: Dados da aplicação (mock de API).
-   - DOM Elements: Seleção de elementos da página.
-   - Components: Funções que criam e manipulam componentes (cards, carrosséis).
-   - Modal Logic: Funções dedicadas ao controle do modal.
-   - Event Listeners: Central de interatividade do usuário.
-   - Initialization: Ponto de entrada da aplicação.
    ========================================================================== */
 
 'use strict';
 
 // --------------------------------------------------------------------------
-// 1. STATE: Simulação de uma API de conteúdo (Enriquecida com detalhes)
+// 1. STATE: Simulação de uma API de conteúdo
 // --------------------------------------------------------------------------
-const apiData = {
+const apiData = { /* ... (os dados permanecem os mesmos da versão anterior, omitido por brevidade) ... */ 
     series: [
         { id: 's1', title: 'A Fundação Cósmica', year: 2024, genre: 'Ficção Científica', rating: '16', description: 'Uma saga intergaláctica que narra a jornada de um grupo de exilados para salvar a humanidade e reconstruir a civilização em meio à queda de um Império Galáctico.', thumbnailGradient: 'linear-gradient(to top, #022a4a, #0d5c8d)' },
         { id: 's2', title: 'Ruptura Mental', year: 2025, genre: 'Suspense Psicológico', rating: '18', description: 'Em uma empresa onde a memória de trabalho dos funcionários foi cirurgicamente dividida entre suas vidas pessoais e profissionais, uma funcionária em busca da verdade inicia uma jornada para desvendar a teia de conspirações.', thumbnailGradient: 'linear-gradient(to top, #013237, #0f6f7b)' },
@@ -37,26 +30,36 @@ const apiData = {
     ]
 };
 
+// REFINAMENTO DE PERFORMANCE: Mantém uma referência ao último elemento focado antes do modal abrir.
+let triggerElement = null;
+
 // --------------------------------------------------------------------------
 // 2. COMPONENTS & UI FUNCTIONS
 // --------------------------------------------------------------------------
+
+/**
+ * REFINAMENTO DE CÓDIGO E SEMÂNTICA: Remove JS inline e usa href significativo.
+ */
 const createCardHTML = (item, category) => {
     return `
-        <li class="card" data-category="${category}" data-id="${item.id}">
-            <a href="#" onclick="return false;">
+        <li class="card" data-category="${category}" data-id="${item.id}" role="button" tabindex="0">
+            <div class="card-link-content">
                 <div class="card-thumbnail" style="background: ${item.thumbnailGradient};">
                     <span>${item.title}</span>
                 </div>
                 <h3 class="card-title">${item.title}</h3>
-            </a>
+            </div>
         </li>
     `;
 };
+
 const populateCarousel = (carouselListElement, data, category) => {
     if (!carouselListElement) return;
     carouselListElement.innerHTML = data.map(item => createCardHTML(item, category)).join('');
 };
+
 const setupCarouselControls = (carouselArticleElement) => {
+    // ... (esta função permanece a mesma, omitida por brevidade)
     const content = carouselArticleElement.querySelector('.carousel-content');
     const prevButton = carouselArticleElement.querySelector('.control-prev');
     const nextButton = carouselArticleElement.querySelector('.control-next');
@@ -72,7 +75,9 @@ const setupCarouselControls = (carouselArticleElement) => {
         content.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     });
 };
+
 const setupScrollHeaderEffect = (headerElement) => {
+    // ... (esta função permanece a mesma, omitida por brevidade)
     window.addEventListener('scroll', () => {
         if (window.scrollY > 10) {
             headerElement.classList.add('scrolled');
@@ -83,99 +88,125 @@ const setupScrollHeaderEffect = (headerElement) => {
 };
 
 // --------------------------------------------------------------------------
-// 3. NOVA SEÇÃO: Lógica do Modal
+// 3. Lógica do Modal (Refinada para Acessibilidade e Performance)
 // --------------------------------------------------------------------------
 
-/**
- * Preenche e abre o modal com os dados de um item específico.
- * @param {object} itemData - O objeto de dados do item que foi clicado.
- */
-function openModal(itemData) {
-    const modalContainer = document.getElementById('modal-container');
-    // Selecionamos os elementos internos do modal aqui para garantir que eles existam.
-    document.getElementById('modal-thumbnail').style.background = itemData.thumbnailGradient;
-    document.getElementById('modal-title').textContent = itemData.title;
-    document.getElementById('modal-year').textContent = itemData.year;
-    document.getElementById('modal-genre').textContent = itemData.genre;
-    document.getElementById('modal-rating').textContent = `+${itemData.rating}`;
-    document.getElementById('modal-description').textContent = itemData.description;
+function openModal(itemData, domElements) {
+    triggerElement = document.activeElement; // REFINAMENTO DE ACESSIBILIDADE: Salva quem abriu o modal
 
-    document.body.classList.add('modal-is-open'); // Trava o scroll do fundo
-    modalContainer.classList.add('is-open');
+    // REFINAMENTO DE PERFORMANCE: Usa referências de elementos já selecionadas
+    domElements.modal.thumbnail.style.background = itemData.thumbnailGradient;
+    domElements.modal.title.textContent = itemData.title;
+    domElements.modal.year.textContent = itemData.year;
+    domElements.modal.genre.textContent = itemData.genre;
+    domElements.modal.rating.textContent = `${itemData.rating === 'Livre' ? '' : '+'}${itemData.rating}`;
+    domElements.modal.description.textContent = itemData.description;
+
+    document.body.classList.add('modal-is-open');
+    domElements.modal.container.classList.add('is-open');
+
+    // REFINAMENTO DE ACESSIBILIDADE: Move o foco para dentro do modal
+    domElements.modal.closeButton.focus();
 }
 
-/**
- * Fecha o modal.
- */
-function closeModal() {
-    const modalContainer = document.getElementById('modal-container');
+function closeModal(domElements) {
     document.body.classList.remove('modal-is-open');
-    modalContainer.classList.remove('is-open');
+    domElements.modal.container.classList.remove('is-open');
+    
+    // REFINAMENTO DE ACESSIBILIDADE: Devolve o foco para quem abriu o modal
+    triggerElement?.focus();
 }
 
-/**
- * Configura todos os event listeners para o sistema do modal.
- * Usa a técnica de DELEGAÇÃO DE EVENTOS para performance.
- */
-function setupModalEventListeners() {
-    const carouselsContainer = document.querySelector('.carousels-container');
-    const modalContainer = document.getElementById('modal-container');
-    const modalCloseButton = document.getElementById('modal-close-button');
-    const modalOverlay = document.getElementById('modal-overlay');
-
-    // Listener único no container dos carrosséis (delegação de eventos)
-    carouselsContainer.addEventListener('click', (event) => {
-        const card = event.target.closest('.card'); // Encontra o card pai mais próximo do elemento clicado
-        if (!card) return; // Se não clicou em um card, não faz nada
+function setupModalEventListeners(domElements) {
+    domElements.carouselsContainer.addEventListener('click', (event) => {
+        const card = event.target.closest('.card');
+        if (!card) return;
 
         const category = card.dataset.category;
         const id = card.dataset.id;
-        
-        // Encontra o item correspondente nos nossos dados
         const itemData = apiData[category]?.find(item => item.id === id);
 
         if (itemData) {
-            openModal(itemData);
+            openModal(itemData, domElements);
+        }
+    });
+    
+    // Permite que o card seja ativado com a tecla Enter, como um botão
+    domElements.carouselsContainer.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const card = event.target.closest('.card');
+            if (!card) return;
+            const category = card.dataset.category;
+            const id = card.dataset.id;
+            const itemData = apiData[category]?.find(item => item.id === id);
+            if (itemData) {
+                openModal(itemData, domElements);
+            }
         }
     });
 
-    // Listeners para fechar o modal
-    modalCloseButton.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', closeModal);
+    domElements.modal.closeButton.addEventListener('click', () => closeModal(domElements));
+    domElements.modal.overlay.addEventListener('click', () => closeModal(domElements));
     
-    // Listener para a tecla 'Escape' para fechar o modal (melhora a acessibilidade)
     window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modalContainer.classList.contains('is-open')) {
-            closeModal();
+        if (event.key === 'Escape' && domElements.modal.container.classList.contains('is-open')) {
+            closeModal(domElements);
+        }
+        
+        // REFINAMENTO DE ACESSIBILIDADE: "Prende" o foco dentro do modal
+        if (event.key === 'Tab' && domElements.modal.container.classList.contains('is-open')) {
+            const focusableElements = domElements.modal.content.querySelectorAll('button');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (event.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    lastElement.focus();
+                    event.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === lastElement) {
+                    firstElement.focus();
+                    event.preventDefault();
+                }
+            }
         }
     });
 }
-
 
 // --------------------------------------------------------------------------
 // 4. INITIALIZATION (Final e completa)
 // --------------------------------------------------------------------------
 function initializeApp() {
-    // Seleciona os elementos do DOM
-    const seriesList = document.getElementById('series-list');
-    const moviesList = document.getElementById('movies-list');
-    const docsList = document.getElementById('docs-list');
-    const carousels = document.querySelectorAll('.carousel');
-    const mainHeader = document.querySelector('.main-header');
+    // REFINAMENTO DE PERFORMANCE: Centraliza todas as consultas ao DOM
+    const domElements = {
+        seriesList: document.getElementById('series-list'),
+        moviesList: document.getElementById('movies-list'),
+        docsList: document.getElementById('docs-list'),
+        carousels: document.querySelectorAll('.carousel'),
+        mainHeader: document.querySelector('.main-header'),
+        carouselsContainer: document.querySelector('.carousels-container'),
+        modal: {
+            container: document.getElementById('modal-container'),
+            content: document.querySelector('.modal-content'),
+            overlay: document.getElementById('modal-overlay'),
+            closeButton: document.getElementById('modal-close-button'),
+            thumbnail: document.getElementById('modal-thumbnail'),
+            title: document.getElementById('modal-title'),
+            year: document.getElementById('modal-year'),
+            genre: document.getElementById('modal-genre'),
+            rating: document.getElementById('modal-rating'),
+            description: document.getElementById('modal-description'),
+        }
+    };
 
-    // Popula cada carrossel com seus respectivos dados e categoria.
-    populateCarousel(seriesList, apiData.series, 'series');
-    populateCarousel(moviesList, apiData.movies, 'movies');
-    populateCarousel(docsList, apiData.docs, 'docs');
+    populateCarousel(domElements.seriesList, apiData.series, 'series');
+    populateCarousel(domElements.moviesList, apiData.movies, 'movies');
+    populateCarousel(domElements.docsList, apiData.docs, 'docs');
     
-    // Adiciona os controles de botão a cada carrossel.
-    carousels.forEach(setupCarouselControls);
-
-    // Ativa o efeito de scroll no header.
-    setupScrollHeaderEffect(mainHeader);
-
-    // **NOVA INTEGRAÇÃO:** Ativa a lógica do modal.
-    setupModalEventListeners();
+    domElements.carousels.forEach(setupCarouselControls);
+    setupScrollHeaderEffect(domElements.mainHeader);
+    setupModalEventListeners(domElements);
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
