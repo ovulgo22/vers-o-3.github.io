@@ -1,30 +1,18 @@
 /* ==========================================================================
-   ARQUIVO: style.css
+   ARQUIVO: style.css (VERSÃO REVISADA E REFINADA)
    PROJETO: Pitchutcha TV+
-   ARQUITETURA CSS: ITCSS (Inverted Triangle CSS) conceitual
-   - Settings: Variáveis globais, fontes.
-   - Tools: Funções e mixins (não usaremos em CSS puro).
-   - Generic: Reset e normalização de estilos.
-   - Elements: Estilos base de tags HTML (body, h1, p).
-   - Objects: Classes de layout (container).
-   - Components: Estilos de componentes específicos (header, card, carousel).
-   - Utilities: Classes auxiliares (não usadas extensivamente aqui).
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. SETTINGS: Variáveis Globais (A base matemática do nosso Design System)
    -------------------------------------------------------------------------- */
-
 :root {
-    /* Paleta de Cores Cinematográfica */
-    --color-background: #0d0d0f; /* Um preto profundo, não absoluto, para conforto visual */
-    --color-surface: #1a1a1d;    /* Superfície para cards e elementos elevados */
-    --color-primary-text: #f5f5f7; /* Branco suave da Apple */
+    --color-background: #0d0d0f;
+    --color-surface: #1a1a1d;
+    --color-primary-text: #f5f5f7;
     --color-secondary-text: #a1a1a6;
-    --color-accent: #2997FF;     /* Azul vibrante para ações e destaques */
+    --color-accent: #2997FF;
     --color-border: rgba(255, 255, 255, 0.1);
-
-    /* Tipografia Fluida (Matemática Responsiva com clamp()) */
     --font-family-base: 'Inter', sans-serif;
     --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.94rem);
     --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.25rem);
@@ -32,46 +20,27 @@
     --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.25rem);
     --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 3rem);
     --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 4rem);
-
-    /* Ritmo Vertical e Espaçamento (Escala Geométrica) */
-    --spacing-xs: 0.5rem;  /* 8px */
-    --spacing-sm: 1rem;    /* 16px (base) */
-    --spacing-md: 1.5rem;  /* 24px */
-    --spacing-lg: 2rem;    /* 32px */
-    --spacing-xl: 4rem;    /* 64px */
-
-    /* Física de Animação (Curvas de Bezier) */
-    --transition-timing-standard: cubic-bezier(0.4, 0, 0.2, 1); /* Aceleração e desaceleração natural */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+    --transition-timing-standard: cubic-bezier(0.4, 0, 0.2, 1);
     --transition-duration-fast: 250ms;
     --transition-duration-slow: 400ms;
-
-    /* Geometria de Componentes */
     --border-radius-standard: 12px;
     --border-radius-small: 8px;
 }
 
-
 /* --------------------------------------------------------------------------
    2. GENERIC: Reset e Normalização
    -------------------------------------------------------------------------- */
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 /* --------------------------------------------------------------------------
    3. ELEMENTS: Estilos Base
    -------------------------------------------------------------------------- */
-
 body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
@@ -79,489 +48,120 @@ body {
     background-color: var(--color-background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden; /* Previne scroll horizontal */
+    overflow-x: hidden;
 }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-a {
-    color: inherit;
-    text-decoration: none;
+/* REFINAMENTO DE ACESSIBILIDADE 1: Foco Global
+   - Garante que TODOS os elementos interativos tenham um indicador de foco claro e consistente.
+*/
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+.card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--border-radius-small);
 }
-
-ul {
-    list-style: none;
-}
-
-button {
-    font-family: inherit;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: inherit;
-}
-
 
 /* --------------------------------------------------------------------------
    4. COMPONENTS: A construção da Interface
    -------------------------------------------------------------------------- */
 
 /* Header */
-.main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(13, 13, 15, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--spacing-xs) var(--spacing-lg);
-    max-width: 1920px;
-    margin: 0 auto;
-}
-
-.main-nav ul {
-    display: flex;
-    gap: var(--spacing-md);
-}
-
-.nav-link {
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    padding: var(--spacing-xs) 0;
-    position: relative;
-    transition: color var(--transition-duration-fast) var(--transition-timing-standard);
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-accent);
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform var(--transition-duration-fast) var(--transition-timing-standard);
-}
-
-.nav-link:hover, .nav-link.active {
-    color: var(--color-accent);
-}
-.nav-link.active::after {
-    transform: scaleX(1);
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.icon-button {
-    padding: var(--spacing-xs);
-    border-radius: 50%;
-    transition: background-color var(--transition-duration-fast) var(--transition-timing-standard);
-}
-.icon-button:hover {
-    background-color: var(--color-surface);
-}
-
-.cta-button {
-    background-color: var(--color-accent);
-    color: var(--color-primary-text);
-    font-weight: 600;
-    font-size: var(--font-size-sm);
-    padding: var(--spacing-xs) var(--spacing-md);
-    border-radius: var(--border-radius-standard);
-    transition: transform var(--transition-duration-fast) var(--transition-timing-standard), box-shadow var(--transition-duration-fast) var(--transition-timing-standard);
-}
-
-.cta-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(41, 151, 255, 0.5);
-}
+.main-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(13, 13, 15, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border); }
+.header-container { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-xs) var(--spacing-lg); max-width: 1920px; margin: 0 auto; }
+.main-nav ul { display: flex; gap: var(--spacing-md); }
+.nav-link { font-size: var(--font-size-sm); font-weight: 600; padding: var(--spacing-xs) 0; position: relative; transition: color var(--transition-duration-fast) var(--transition-timing-standard); }
+.nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--color-accent); transform: scaleX(0); transform-origin: center; transition: transform var(--transition-duration-fast) var(--transition-timing-standard); }
+.nav-link:hover, .nav-link.active { color: var(--color-accent); }
+.nav-link.active::after { transform: scaleX(1); }
+.header-actions { display: flex; align-items: center; gap: var(--spacing-sm); }
+.icon-button { padding: var(--spacing-xs); border-radius: 50%; transition: background-color var(--transition-duration-fast) var(--transition-timing-standard); }
+.icon-button:hover { background-color: var(--color-surface); }
+.cta-button { background-color: var(--color-accent); color: var(--color-primary-text); font-weight: 600; font-size: var(--font-size-sm); padding: var(--spacing-xs) var(--spacing-md); border-radius: var(--border-radius-standard); transition: transform var(--transition-duration-fast) var(--transition-timing-standard), box-shadow var(--transition-duration-fast) var(--transition-timing-standard); }
+.cta-button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(41, 151, 255, 0.5); }
+.main-header.scrolled { background: rgba(13, 13, 15, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
 
 /* Hero Section */
-.hero-section {
-    padding-top: 120px; /* Espaço para o header fixo */
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    /* Fundo codificado: Gradiente complexo para simular profundidade e um ambiente cósmico */
-    background: 
-        radial-gradient(ellipse at 70% 30%, rgba(41, 151, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 30% 70%, rgba(150, 41, 255, 0.1) 0%, transparent 40%),
-        linear-gradient(180deg, var(--color-background) 0%, #000 70%, var(--color-background) 100%);
-}
-
-.hero-content {
-    max-width: 800px;
-    padding: 0 var(--spacing-lg);
-    animation: fadeIn 1.5s var(--transition-timing-standard) forwards;
-    opacity: 0;
-}
-
-@keyframes fadeIn {
-    to { opacity: 1; }
-}
-
-.hero-title {
-    font-size: var(--font-size-xxl);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--spacing-sm);
-}
-
-.hero-description {
-    font-size: var(--font-size-md);
-    color: var(--color-secondary-text);
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto var(--spacing-lg);
-}
-
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-sm);
-}
-
-.play-button {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    background-color: var(--color-primary-text);
-    color: #000;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-standard);
-    font-weight: 600;
-    transition: all var(--transition-duration-fast) var(--transition-timing-standard);
-}
-.play-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(245, 245, 247, 0.4);
-}
-.play-button svg { margin-bottom: -2px; }
-
-.info-button {
-    font-size: 1.5rem;
-    font-weight: 700;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    transition: all var(--transition-duration-fast) var(--transition-timing-standard);
-}
-.info-button:hover {
-    transform: scale(1.1);
-    background-color: rgba(255, 255, 255, 0.2);
-}
+.hero-section { padding-top: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; background: radial-gradient(ellipse at 70% 30%, rgba(41, 151, 255, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(150, 41, 255, 0.1) 0%, transparent 40%), linear-gradient(180deg, var(--color-background) 0%, #000 70%, var(--color-background) 100%); }
+.hero-content { max-width: 800px; padding: 0 var(--spacing-lg); animation: fadeIn 1.5s var(--transition-timing-standard) forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity: 1; } }
+.hero-title { font-size: var(--font-size-xxl); font-weight: 700; letter-spacing: -0.02em; margin-bottom: var(--spacing-sm); }
+.hero-description { font-size: var(--font-size-md); color: var(--color-secondary-text); line-height: 1.6; max-width: 600px; margin: 0 auto var(--spacing-lg); }
+.hero-buttons { display: flex; justify-content: center; gap: var(--spacing-sm); }
+/* REFINAMENTO DE ROBUSTEZ 2: Botão Play com Flexbox
+   - Removemos o "número mágico" (margin-bottom) e usamos Flexbox para um alinhamento perfeito.
+*/
+.play-button { display: flex; align-items: center; justify-content: center; gap: var(--spacing-xs); background-color: var(--color-primary-text); color: #000; padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--border-radius-standard); font-weight: 600; transition: all var(--transition-duration-fast) var(--transition-timing-standard); }
+.play-button:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(245, 245, 247, 0.4); }
+.info-button { font-size: 1.5rem; font-weight: 700; width: 50px; height: 50px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all var(--transition-duration-fast) var(--transition-timing-standard); }
+.info-button:hover { transform: scale(1.1); background-color: rgba(255, 255, 255, 0.2); }
 
 /* Carousels Container */
-.carousels-container {
-    padding: var(--spacing-xl) 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xl);
-}
+.carousels-container { padding: var(--spacing-xl) 0; display: flex; flex-direction: column; gap: var(--spacing-xl); }
+.carousel { padding-left: var(--spacing-lg); }
+.carousel-title { font-size: var(--font-size-lg); font-weight: 700; margin-bottom: var(--spacing-md); }
+.carousel-content { overflow-x: auto; }
+/* REFINAMENTO DE USABILIDADE 3: Scrollbar Estilizado
+   - Em vez de esconder a scrollbar, nós a estilizamos para combinar com o tema escuro.
+*/
+.carousel-content::-webkit-scrollbar { height: 8px; }
+.carousel-content::-webkit-scrollbar-track { background: transparent; }
+.carousel-content::-webkit-scrollbar-thumb { background-color: var(--color-surface); border-radius: 10px; border: 2px solid var(--color-background); }
+.carousel-content::-webkit-scrollbar-thumb:hover { background-color: #333; }
 
-.carousel {
-    padding-left: var(--spacing-lg); /* Espaçamento inicial para o primeiro item */
-}
-
-.carousel-title {
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    margin-bottom: var(--spacing-md);
-}
-
-.carousel-content {
-    overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE */
-}
-.carousel-content::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
-
-.carousel-list {
-    display: flex;
-    gap: var(--spacing-sm);
-    padding-bottom: var(--spacing-md); /* Espaço para sombra e indicador de scroll */
-}
-
-/* Card de Conteúdo */
-.card {
-    display: block;
-    width: 280px;
-    flex-shrink: 0;
-    border-radius: var(--border-radius-standard);
-    overflow: hidden;
-    position: relative;
-    transition: transform var(--transition-duration-slow) var(--transition-timing-standard);
-}
-.card:hover {
-    transform: scale(1.03) translateY(-10px);
-    z-index: 10;
-}
-.card:hover .card-thumbnail::after {
-    opacity: 1;
-}
-
-.card-thumbnail {
-    width: 100%;
-    /* Geometria: Proporção de cinema (16:9) mantida em qualquer tamanho */
-    aspect-ratio: 16 / 9;
-    background-color: var(--color-surface);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-secondary-text);
-}
-.card-thumbnail::after { /* Overlay de hover */
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity var(--transition-duration-fast) var(--transition-timing-standard);
-}
-
-.card-title {
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    margin-top: var(--spacing-xs);
-}
-
-/* Carousel Controls (serão estilizados se implementados com JS avançado) */
-.carousel-controls {
-    display: none; /* Por simplicidade inicial, focamos no scroll nativo */
-}
+.carousel-list { display: flex; gap: var(--spacing-sm); padding-bottom: var(--spacing-md); }
+/* REFINAMENTO DE POSICIONAMENTO 4: Card com Flexbox
+   - O card agora é um container flexível vertical, o que garante que seu conteúdo interno
+     se organize de forma previsível e que os cards na mesma linha mantenham a consistência.
+*/
+.card { display: flex; flex-direction: column; width: 280px; flex-shrink: 0; border-radius: var(--border-radius-standard); background-color: var(--color-surface); overflow: hidden; position: relative; transition: all var(--transition-duration-slow) var(--transition-timing-standard); cursor: pointer; }
+.card:hover { transform: scale(1.03) translateY(-10px); z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+.card:hover .card-thumbnail::after { opacity: 1; }
+.card-thumbnail { width: 100%; aspect-ratio: 16 / 9; background-color: var(--color-surface); position: relative; display: flex; align-items: center; justify-content: center; color: var(--color-secondary-text); }
+.card-thumbnail::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%); opacity: 0; transition: opacity var(--transition-duration-fast) var(--transition-timing-standard); }
+.card-title { font-size: var(--font-size-sm); font-weight: 600; padding: var(--spacing-sm); flex-grow: 1; /* Permite que o título ocupe o espaço, ajudando no alinhamento */ }
+.carousel-controls { display: none; /* Alterado no JS */ }
 
 /* Footer */
-.main-footer {
-    padding: var(--spacing-lg) var(--spacing-lg);
-    border-top: 1px solid var(--color-border);
-    background-color: var(--color-surface);
-}
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-}
-.footer-nav {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    flex-wrap: wrap;
-}
-.footer-nav a {
-    font-size: var(--font-size-sm);
-    color: var(--color-secondary-text);
-    transition: color var(--transition-duration-fast) var(--transition-timing-standard);
-}
-.footer-nav a:hover {
-    color: var(--color-accent);
-}
-.footer-copyright {
-    font-size: var(--font-size-sm);
-    color: var(--color-secondary-text);
-    opacity: 0.7;
-}
+.main-footer { padding: var(--spacing-lg); border-top: 1px solid var(--color-border); background-color: var(--color-surface); }
+.footer-container { max-width: 1200px; margin: 0 auto; text-align: center; }
+.footer-nav { display: flex; justify-content: center; gap: var(--spacing-md); margin-bottom: var(--spacing-md); flex-wrap: wrap; }
+.footer-nav a { font-size: var(--font-size-sm); color: var(--color-secondary-text); transition: color var(--transition-duration-fast) var(--transition-timing-standard); }
+.footer-nav a:hover { color: var(--color-accent); }
+.footer-copyright { font-size: var(--font-size-sm); color: var(--color-secondary-text); opacity: 0.7; }
 
 /* --------------------------------------------------------------------------
-   5. RESPONSIVIDADE: Ajustes finos para telas maiores
+   5. MODAL: Estilos do Modal de Detalhes
+   -------------------------------------------------------------------------- */
+.modal-container { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: var(--spacing-sm); opacity: 0; pointer-events: none; transition: opacity var(--transition-duration-fast) var(--transition-timing-standard); }
+.modal-container.is-open { opacity: 1; pointer-events: auto; }
+.modal-overlay { position: absolute; inset: 0; background-color: rgba(13, 13, 15, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; }
+.modal-content { position: relative; z-index: 2001; background-color: var(--color-surface); border-radius: var(--border-radius-standard); width: 100%; max-width: 900px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); overflow: hidden; transform: scale(0.95); transition: transform var(--transition-duration-fast) var(--transition-timing-standard); }
+.modal-container.is-open .modal-content { transform: scale(1); }
+@media (min-width: 768px) { .modal-content { display: flex; max-height: 90vh; } }
+.modal-close-button { position: absolute; top: var(--spacing-sm); right: var(--spacing-sm); z-index: 2002; background-color: rgba(0,0,0,0.3); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--color-primary-text); transition: all var(--transition-duration-fast) var(--transition-timing-standard); }
+.modal-close-button:hover { transform: scale(1.1) rotate(90deg); background-color: rgba(0,0,0,0.6); }
+.modal-thumbnail { width: 100%; aspect-ratio: 16 / 9; background-size: cover; background-position: center; }
+@media (min-width: 768px) { .modal-thumbnail { width: 50%; flex-shrink: 0; aspect-ratio: auto; } }
+.modal-info { padding: var(--spacing-lg); display: flex; flex-direction: column; }
+@media (min-width: 768px) { .modal-info { overflow-y: auto; } }
+.modal-title { font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-xs); }
+.modal-meta { display: flex; gap: var(--spacing-xs); font-size: var(--font-size-sm); color: var(--color-secondary-text); margin-bottom: var(--spacing-md); align-items: center; }
+.meta-divider { font-size: 0.8rem; opacity: 0.5; }
+.modal-description { line-height: 1.7; color: var(--color-secondary-text); margin-bottom: var(--spacing-lg); flex-grow: 1; }
+.modal-actions { display: flex; gap: var(--spacing-sm); align-items: center; }
+.add-list-button { font-size: 1.8rem; font-weight: 400; width: 50px; height: 50px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all var(--transition-duration-fast) var(--transition-timing-standard); line-height: 50px; padding-bottom: 4px; }
+.add-list-button:hover { transform: scale(1.1); background-color: rgba(255, 255, 255, 0.2); }
+body.modal-is-open { overflow: hidden; }
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVIDADE: Ajustes finos para telas maiores
    -------------------------------------------------------------------------- */
 @media (min-width: 768px) {
-    .card {
-        width: 320px;
-    }
-    .carousel {
-        padding-left: var(--spacing-xl); /* Mais espaçamento em telas maiores */
-    }
-}
-/* ==========================================================================
-   COMPLEMENTO: Estilos do Modal de Detalhes
-   INSTRUÇÃO: Adicione este bloco inteiro no final do seu arquivo style.css
-   ========================================================================== */
-
-/* Container Principal do Modal */
-.modal-container {
-    position: fixed;
-    inset: 0; /* Atalho para top: 0; right: 0; bottom: 0; left: 0; */
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-sm);
-
-    /* Estado inicial: Oculto e sem interação */
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-duration-fast) var(--transition-timing-standard);
-}
-
-/* Classe de controle (adicionada via JS) para exibir o modal */
-.modal-container.is-open {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* Fundo Escurecido (Overlay) */
-.modal-overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(13, 13, 15, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    cursor: pointer; /* Permite fechar o modal clicando no fundo */
-}
-
-/* Caixa de Conteúdo do Modal */
-.modal-content {
-    position: relative;
-    z-index: 2001;
-    background-color: var(--color-surface);
-    border-radius: var(--border-radius-standard);
-    width: 100%;
-    max-width: 900px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-    
-    /* Animação de entrada */
-    transform: scale(0.95);
-    transition: transform var(--transition-duration-fast) var(--transition-timing-standard);
-}
-.modal-container.is-open .modal-content {
-    transform: scale(1);
-}
-
-/* Layout interno do Modal */
-@media (min-width: 768px) {
-    .modal-content {
-        display: flex;
-        max-height: 90vh;
-    }
-}
-
-/* Botão de Fechar (X) */
-.modal-close-button {
-    position: absolute;
-    top: var(--spacing-sm);
-    right: var(--spacing-sm);
-    z-index: 2002;
-    background-color: rgba(0,0,0,0.3);
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-primary-text);
-    transition: all var(--transition-duration-fast) var(--transition-timing-standard);
-}
-.modal-close-button:hover {
-    transform: scale(1.1) rotate(90deg);
-    background-color: rgba(0,0,0,0.6);
-}
-
-/* "Thumbnail" do Conteúdo no Modal */
-.modal-thumbnail {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background-size: cover;
-    background-position: center;
-}
-@media (min-width: 768px) {
-    .modal-thumbnail {
-        width: 50%;
-        flex-shrink: 0;
-        aspect-ratio: auto;
-    }
-}
-
-/* Área de Informações do Modal */
-.modal-info {
-    padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-}
-@media (min-width: 768px) {
-    .modal-info {
-        overflow-y: auto; /* Permite scroll se o conteúdo for longo */
-    }
-}
-
-.modal-title {
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    margin-bottom: var(--spacing-xs);
-}
-
-.modal-meta {
-    display: flex;
-    gap: var(--spacing-xs);
-    font-size: var(--font-size-sm);
-    color: var(--color-secondary-text);
-    margin-bottom: var(--spacing-md);
-    align-items: center;
-}
-.meta-divider {
-    font-size: 0.8rem;
-    opacity: 0.5;
-}
-
-.modal-description {
-    line-height: 1.7;
-    color: var(--color-secondary-text);
-    margin-bottom: var(--spacing-lg);
-    flex-grow: 1; /* Faz a descrição ocupar o espaço disponível */
-}
-
-.modal-actions {
-    display: flex;
-    gap: var(--spacing-sm);
-    align-items: center;
-}
-
-/* Botão secundário "Adicionar à Lista" */
-.add-list-button {
-    font-size: 1.8rem;
-    font-weight: 400;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    transition: all var(--transition-duration-fast) var(--transition-timing-standard);
-    line-height: 50px;
-    padding-bottom: 4px; /* Ajuste visual do '+' */
-}
-.add-list-button:hover {
-    transform: scale(1.1);
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Acessibilidade: Melhora o foco para navegação por teclado */
-.modal-close-button:focus-visible, .play-button:focus-visible, .add-list-button:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-}
-/* COMPLEMENTO FINAL: Trava de scroll do Body */
-body.modal-is-open {
-    overflow: hidden;
+    .card { width: 320px; }
+    .carousel { padding-left: var(--spacing-xl); }
 }
