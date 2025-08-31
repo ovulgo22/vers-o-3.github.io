@@ -1,11 +1,9 @@
 /* ==========================================================================
-   ARQUIVO: style.css (VERSÃO REVISADA E REFINADA)
+   ARQUIVO: style.css (VERSÃO FINAL COM ANIMAÇÃO E REFINAMENTOS)
    PROJETO: Pitchutcha TV+
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. SETTINGS: Variáveis Globais (A base matemática do nosso Design System)
-   -------------------------------------------------------------------------- */
+/* ... (As seções 1, 2 e 3 permanecem as mesmas) ... */
 :root {
     --color-background: #0d0d0f;
     --color-surface: #1a1a1d;
@@ -31,16 +29,8 @@
     --border-radius-standard: 12px;
     --border-radius-small: 8px;
 }
-
-/* --------------------------------------------------------------------------
-   2. GENERIC: Reset e Normalização
-   -------------------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-
-/* --------------------------------------------------------------------------
-   3. ELEMENTS: Estilos Base
-   -------------------------------------------------------------------------- */
 body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
@@ -53,10 +43,6 @@ body {
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-
-/* REFINAMENTO DE ACESSIBILIDADE 1: Foco Global
-   - Garante que TODOS os elementos interativos tenham um indicador de foco claro e consistente.
-*/
 a:focus-visible,
 button:focus-visible,
 [role="button"]:focus-visible,
@@ -66,11 +52,7 @@ button:focus-visible,
     border-radius: var(--border-radius-small);
 }
 
-/* --------------------------------------------------------------------------
-   4. COMPONENTS: A construção da Interface
-   -------------------------------------------------------------------------- */
-
-/* Header */
+/* ... (O Header permanece o mesmo) ... */
 .main-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(13, 13, 15, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border); }
 .header-container { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-xs) var(--spacing-lg); max-width: 1920px; margin: 0 auto; }
 .main-nav ul { display: flex; gap: var(--spacing-md); }
@@ -85,48 +67,116 @@ button:focus-visible,
 .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(41, 151, 255, 0.5); }
 .main-header.scrolled { background: rgba(13, 13, 15, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
 
-/* Hero Section */
-.hero-section { padding-top: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; background: radial-gradient(ellipse at 70% 30%, rgba(41, 151, 255, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(150, 41, 255, 0.1) 0%, transparent 40%), linear-gradient(180deg, var(--color-background) 0%, #000 70%, var(--color-background) 100%); }
-.hero-content { max-width: 800px; padding: 0 var(--spacing-lg); animation: fadeIn 1.5s var(--transition-timing-standard) forwards; opacity: 0; }
+/* Hero Section com Animação Espacial */
+.hero-section {
+    padding-top: 120px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(180deg, var(--color-background) 0%, #000 70%, var(--color-background) 100%);
+    overflow: hidden; /* Garante que as estrelas não vazem */
+}
+
+/* NOVA FUNCIONALIDADE: Camadas de Estrelas (Parallax) */
+@keyframes move-stars-1 { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
+@keyframes move-stars-2 { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
+@keyframes move-stars-3 { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
+
+#stars-1, #stars-2, #stars-3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#stars-1 {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"><circle fill="white" cx="100" cy="100" r="1"/><circle fill="white" cx="500" cy="800" r="1"/><circle fill="white" cx="1200" cy="300" r="1"/><circle fill="white" cx="1800" cy="1100" r="1"/><circle fill="white" cx="900" cy="1500" r="1"/><circle fill="white" cx="300" cy="1800" r="1"/><circle fill="white" cx="1500" cy="1600" r="1"/></svg>');
+    animation: move-stars-1 200s linear infinite;
+}
+#stars-2 {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"><circle fill="white" cx="200" cy="500" r="1.5"/><circle fill="white" cx="900" cy="100" r="1.5"/><circle fill="white" cx="1600" cy="700" r="1.5"/><circle fill="white" cx="1100" cy="1400" r="1.5"/><circle fill="white" cx="700" cy="1900" r="1.5"/></svg>');
+    animation: move-stars-2 150s linear infinite;
+}
+#stars-3 {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"><circle fill="white" cx="400" cy="300" r="2"/><circle fill="white" cx="1300" cy="900" r="2"/><circle fill="white" cx="1900" cy="1800" r="2"/></svg>');
+    animation: move-stars-3 100s linear infinite;
+}
+/* Fim da Animação Espacial */
+
+.hero-content { z-index: 1; /* Garante que o conteúdo fique sobre as estrelas */ max-width: 800px; padding: 0 var(--spacing-lg); animation: fadeIn 1.5s var(--transition-timing-standard) forwards; opacity: 0; }
 @keyframes fadeIn { to { opacity: 1; } }
+/* ... (Restante do Hero e Carrosséis permanece o mesmo, com uma adição importante) ... */
 .hero-title { font-size: var(--font-size-xxl); font-weight: 700; letter-spacing: -0.02em; margin-bottom: var(--spacing-sm); }
 .hero-description { font-size: var(--font-size-md); color: var(--color-secondary-text); line-height: 1.6; max-width: 600px; margin: 0 auto var(--spacing-lg); }
 .hero-buttons { display: flex; justify-content: center; gap: var(--spacing-sm); }
-/* REFINAMENTO DE ROBUSTEZ 2: Botão Play com Flexbox
-   - Removemos o "número mágico" (margin-bottom) e usamos Flexbox para um alinhamento perfeito.
-*/
 .play-button { display: flex; align-items: center; justify-content: center; gap: var(--spacing-xs); background-color: var(--color-primary-text); color: #000; padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--border-radius-standard); font-weight: 600; transition: all var(--transition-duration-fast) var(--transition-timing-standard); }
 .play-button:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(245, 245, 247, 0.4); }
 .info-button { font-size: 1.5rem; font-weight: 700; width: 50px; height: 50px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all var(--transition-duration-fast) var(--transition-timing-standard); }
 .info-button:hover { transform: scale(1.1); background-color: rgba(255, 255, 255, 0.2); }
 
-/* Carousels Container */
 .carousels-container { padding: var(--spacing-xl) 0; display: flex; flex-direction: column; gap: var(--spacing-xl); }
-.carousel { padding-left: var(--spacing-lg); }
+.carousel { padding-left: var(--spacing-lg); position: relative; } /* Posição relativa para os controles */
 .carousel-title { font-size: var(--font-size-lg); font-weight: 700; margin-bottom: var(--spacing-md); }
-.carousel-content { overflow-x: auto; }
-/* REFINAMENTO DE USABILIDADE 3: Scrollbar Estilizado
-   - Em vez de esconder a scrollbar, nós a estilizamos para combinar com o tema escuro.
-*/
+.carousel-content { overflow-x: auto; scroll-behavior: smooth; /* Essencial para o scroll programático */ }
 .carousel-content::-webkit-scrollbar { height: 8px; }
 .carousel-content::-webkit-scrollbar-track { background: transparent; }
 .carousel-content::-webkit-scrollbar-thumb { background-color: var(--color-surface); border-radius: 10px; border: 2px solid var(--color-background); }
 .carousel-content::-webkit-scrollbar-thumb:hover { background-color: #333; }
 
 .carousel-list { display: flex; gap: var(--spacing-sm); padding-bottom: var(--spacing-md); }
-/* REFINAMENTO DE POSICIONAMENTO 4: Card com Flexbox
-   - O card agora é um container flexível vertical, o que garante que seu conteúdo interno
-     se organize de forma previsível e que os cards na mesma linha mantenham a consistência.
-*/
 .card { display: flex; flex-direction: column; width: 280px; flex-shrink: 0; border-radius: var(--border-radius-standard); background-color: var(--color-surface); overflow: hidden; position: relative; transition: all var(--transition-duration-slow) var(--transition-timing-standard); cursor: pointer; }
 .card:hover { transform: scale(1.03) translateY(-10px); z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
 .card:hover .card-thumbnail::after { opacity: 1; }
 .card-thumbnail { width: 100%; aspect-ratio: 16 / 9; background-color: var(--color-surface); position: relative; display: flex; align-items: center; justify-content: center; color: var(--color-secondary-text); }
 .card-thumbnail::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%); opacity: 0; transition: opacity var(--transition-duration-fast) var(--transition-timing-standard); }
-.card-title { font-size: var(--font-size-sm); font-weight: 600; padding: var(--spacing-sm); flex-grow: 1; /* Permite que o título ocupe o espaço, ajudando no alinhamento */ }
-.carousel-controls { display: none; /* Alterado no JS */ }
+.card-title { font-size: var(--font-size-sm); font-weight: 600; padding: var(--spacing-sm); flex-grow: 1; }
 
-/* Footer */
+/* REFINAMENTO FUNCIONAL: Estilos dos Controles do Carrossel */
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    pointer-events: none; /* Só os botões internos serão clicáveis */
+    opacity: 0;
+    transition: opacity var(--transition-duration-fast) ease;
+}
+.carousel:hover .carousel-controls { opacity: 1; }
+
+.control-prev, .control-next {
+    pointer-events: all;
+    background-color: rgba(26, 26, 29, 0.8);
+    backdrop-filter: blur(10px);
+    width: 40px;
+    height: 80px;
+    font-size: 1.5rem;
+    color: var(--color-primary-text);
+    border-radius: var(--border-radius-small);
+    transition: all var(--transition-duration-fast) ease;
+}
+.control-prev { margin-left: var(--spacing-xs); }
+.control-next { margin-right: var(--spacing-xs); }
+.control-prev:hover, .control-next:hover { background-color: var(--color-surface); }
+
+/* Classe para desabilitar os botões */
+.control-prev:disabled, .control-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+
+/* ... (Footer permanece o mesmo) ... */
 .main-footer { padding: var(--spacing-lg); border-top: 1px solid var(--color-border); background-color: var(--color-surface); }
 .footer-container { max-width: 1200px; margin: 0 auto; text-align: center; }
 .footer-nav { display: flex; justify-content: center; gap: var(--spacing-md); margin-bottom: var(--spacing-md); flex-wrap: wrap; }
@@ -134,9 +184,7 @@ button:focus-visible,
 .footer-nav a:hover { color: var(--color-accent); }
 .footer-copyright { font-size: var(--font-size-sm); color: var(--color-secondary-text); opacity: 0.7; }
 
-/* --------------------------------------------------------------------------
-   5. MODAL: Estilos do Modal de Detalhes
-   -------------------------------------------------------------------------- */
+/* ... (Modal permanece o mesmo, com uma adição) ... */
 .modal-container { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: var(--spacing-sm); opacity: 0; pointer-events: none; transition: opacity var(--transition-duration-fast) var(--transition-timing-standard); }
 .modal-container.is-open { opacity: 1; pointer-events: auto; }
 .modal-overlay { position: absolute; inset: 0; background-color: rgba(13, 13, 15, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; }
@@ -158,9 +206,22 @@ button:focus-visible,
 .add-list-button:hover { transform: scale(1.1); background-color: rgba(255, 255, 255, 0.2); }
 body.modal-is-open { overflow: hidden; }
 
-/* --------------------------------------------------------------------------
-   6. RESPONSIVIDADE: Ajustes finos para telas maiores
-   -------------------------------------------------------------------------- */
+/* REFINAMENTO DE UX: Animação de Conteúdo do Modal */
+.modal-info > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+.modal-container.is-open .modal-info > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Efeito de cascata (stagger) */
+.modal-container.is-open .modal-info > *:nth-child(1) { transition-delay: 100ms; }
+.modal-container.is-open .modal-info > *:nth-child(2) { transition-delay: 150ms; }
+.modal-container.is-open .modal-info > *:nth-child(3) { transition-delay: 200ms; }
+.modal-container.is-open .modal-info > *:nth-child(4) { transition-delay: 250ms; }
+
 @media (min-width: 768px) {
     .card { width: 320px; }
     .carousel { padding-left: var(--spacing-xl); }
