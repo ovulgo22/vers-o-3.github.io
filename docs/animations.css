@@ -11,7 +11,8 @@ button,
 .skill-card,
 .project-card,
 .article-link,
-.contact-link-item {
+.contact-link-item,
+#devto-articles-container .article-card {
     transition: 
         transform var(--transition-speed) ease-in-out,
         background-color var(--transition-speed) ease-in-out,
@@ -30,13 +31,15 @@ button,
 .skill-card:hover,
 .project-card:hover,
 .article-link:hover,
-.contact-link-item:hover {
+.contact-link-item:hover,
+#devto-articles-container .article-card:hover {
     transform: translateY(-4px);
     border-color: var(--color-accent);
 }
 
-/* Os cards de projeto terão uma sombra sutil para maior destaque */
-.project-card:hover {
+/* Os cards de projeto e artigo terão uma sombra sutil para maior destaque */
+.project-card:hover,
+#devto-articles-container .article-card:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
