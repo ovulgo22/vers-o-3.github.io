@@ -5,7 +5,7 @@
 
 Este é o código-fonte do meu portfólio pessoal, um site estático de última geração construído com foco absoluto em performance, design limpo e engenharia de front-end moderna.
 
-**[➡️ Acesse a versão ao vivo aqui](https://SEU-USUARIO.github.io/)**
+**[➡️ Acesse a versão ao vivo aqui](https://ovulgo22.github.io/vers-o-3.github.io/)**
 
 ---
 
