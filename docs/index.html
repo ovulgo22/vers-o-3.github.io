@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pitchutcha TV+ | Originais Exclusivos</title>
+    <title>Pitchutcha TV+ | Início</title>
     <meta name="description" content="Descubra séries e filmes originais premiados no Pitchutcha TV+. Qualidade cinematográfica em todos os seus dispositivos.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 
     <header class="main-header">
         <div class="header-container">
-            <a href="#" class="logo" aria-label="Página inicial do Pitchutcha TV+">
+            <a href="index.html" class="logo" aria-label="Página inicial do Pitchutcha TV+">
                 <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logo-title">
                     <title id="logo-title">Logotipo Pitchutcha TV+</title>
                     <text x="0" y="30" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="white">Pitchutcha</text>
@@ -26,10 +26,10 @@
             </a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#" class="nav-link active">Início</a></li>
-                    <li><a href="#" class="nav-link">Séries</a></li>
-                    <li><a href="#" class="nav-link">Filmes</a></li>
-                    <li><a href="#" class="nav-link">Documentários</a></li>
+                    <li><a href="index.html" class="nav-link active">Início</a></li>
+                    <li><a href="category.html?type=series" class="nav-link">Séries</a></li>
+                    <li><a href="category.html?type=movies" class="nav-link">Filmes</a></li>
+                    <li><a href="category.html?type=docs" class="nav-link">Documentários</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -46,7 +46,6 @@
             <div id="stars-1"></div>
             <div id="stars-2"></div>
             <div id="stars-3"></div>
-
             <div class="hero-content">
                 <h1 class="hero-title">A Fundação Cósmica</h1>
                 <p class="hero-description">Baseado na obra-prima de Isaac Asimov, uma saga intergaláctica sobre a queda de um império e a jornada para salvar a humanidade.</p>
@@ -59,7 +58,6 @@
                 </div>
             </div>
         </section>
-
         <section class="carousels-container">
             <article class="carousel">
                 <h2 class="carousel-title">Séries Originais Pitchutcha</h2>
@@ -107,32 +105,7 @@
     </footer>
     
     <div id="modal-container" class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div id="modal-overlay" class="modal-overlay"></div>
-        <div class="modal-content">
-            <button id="modal-close-button" class="modal-close-button" aria-label="Fechar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <div id="modal-thumbnail" class="modal-thumbnail"></div>
-            <div class="modal-info">
-                <h2 id="modal-title" class="modal-title"></h2>
-                <div class="modal-meta">
-                    <span id="modal-year"></span>
-                    <span class="meta-divider">|</span>
-                    <span id="modal-genre"></span>
-                    <span class="meta-divider">|</span>
-                    <span id="modal-rating"></span>
-                </div>
-                <p id="modal-description" class="modal-description"></p>
-                <div class="modal-actions">
-                    <button class="play-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-                        <span>Assistir Agora</span>
-                    </button>
-                    <button class="add-list-button" aria-label="Adicionar à Minha Lista">+</button>
-                </div>
-            </div>
-        </div>
-    </div>
+         </div>
 
 </body>
 </html>
