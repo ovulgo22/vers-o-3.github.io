@@ -1,161 +1,96 @@
+/* ==========================================================================
+   ARQUITETURA DO SCRIPT
+   - Encapsulamento em um listener DOMContentLoaded para garantir que o HTML esteja pronto.
+   - Funções separadas para cada responsabilidade (Tema, Scroll, etc.).
+   - Foco em performance usando APIs modernas (IntersectionObserver).
+   ========================================================================== */
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // LÓGICA PARA A PÁGINA INICIAL (index.html)
-    const canvas = document.getElementById('particles-js');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    // --------------------------------------------------------------------------
+    // 1. GERENCIADOR DE TEMA (DARK/LIGHT MODE)
+    // --------------------------------------------------------------------------
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
 
-        let particlesArray;
+    // Função para aplicar o tema e salvar a preferência
+    const applyTheme = (theme) => {
+        body.classList.remove('theme-light', 'theme-dark');
+        body.classList.add(`theme-${theme}`);
+        localStorage.setItem('theme', theme);
 
-        // Propriedades das partículas
-        const particleProps = {
-            count: 100,
-            radius: 2,
-            color: 'rgba(88, 166, 255, 0.7)',
-            lineColor: 'rgba(88, 166, 255, 0.15)',
-            speed: 0.5,
-            lineDistance: 150
-        };
-
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-                this.color = color;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-
-            update() {
-                if (this.x > canvas.width || this.x < 0) {
-                    this.directionX = -this.directionX;
-                }
-                if (this.y > canvas.height || this.y < 0) {
-                    this.directionY = -this.directionY;
-                }
-                this.x += this.directionX;
-                this.y += this.directionY;
-                this.draw();
-            }
+        // Atualiza o ícone (o objeto 'icons' vem do icons.js)
+        if (themeIcon && window.icons) {
+            themeIcon.innerHTML = theme === 'light' ? icons.sun : icons.moon;
         }
+    };
 
-        function init() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9000;
-            if (numberOfParticles > particleProps.count) numberOfParticles = particleProps.count;
-
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * particleProps.radius) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * particleProps.speed) - (particleProps.speed / 2);
-                let directionY = (Math.random() * particleProps.speed) - (particleProps.speed / 2);
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, particleProps.color));
-            }
+    // Adiciona animação ao ícone
+    const animateIcon = () => {
+        if (themeIcon) {
+            themeIcon.classList.add('theme-icon-spin');
+            themeIcon.addEventListener('animationend', () => {
+                themeIcon.classList.remove('theme-icon-spin');
+            }, { once: true });
         }
+    };
 
-        function connect() {
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
-                        ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width / 7) * (canvas.height / 7) && distance < particleProps.lineDistance * particleProps.lineDistance) {
-                        ctx.strokeStyle = particleProps.lineColor;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
+    // Listener para o botão de troca de tema
+    themeToggleButton.addEventListener('click', () => {
+        const newTheme = body.classList.contains('theme-light') ? 'dark' : 'light';
+        applyTheme(newTheme);
+        animateIcon();
+    });
+
+    // Lógica inicial de carregamento do tema
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    applyTheme(initialTheme);
+
+
+    // --------------------------------------------------------------------------
+    // 2. OBSERVERS DE SCROLL (SCROLLSPY E ANIMAÇÕES)
+    // --------------------------------------------------------------------------
+    const sections = document.querySelectorAll('.content-section');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+    const observerOptions = {
+        root: null, // Observa em relação ao viewport
+        rootMargin: '0px',
+        threshold: 0.3 // Ativa quando 30% da seção está visível
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const id = entry.target.getAttribute('id');
+            const correspondingLink = document.querySelector(`.sidebar-link[href="#${id}"]`);
+
+            // Animação de entrada
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
             }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
+            
+            // Destaque do link na sidebar
+            if (entry.isIntersecting && correspondingLink) {
+                 sidebarLinks.forEach(link => link.classList.remove('active'));
+                 correspondingLink.classList.add('active');
             }
-            connect();
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
-            init();
         });
+    }, observerOptions);
 
-        init();
-        animate();
-    }
-
-
-    // LÓGICA PARA A PÁGINA DE DOCUMENTAÇÃO (docs.html)
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-        const menuToggle = document.getElementById('menu-toggle');
-        const sidebarLinks = document.querySelectorAll('.sidebar-link');
-        const contentSections = document.querySelectorAll('.content-section');
-
-        // Funcionalidade do Menu Mobile
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            // Ocultamente, pode-se adicionar uma classe ao body para travar o scroll do conteúdo principal
-        });
-
-        // Fechar sidebar ao clicar em um link (para mobile)
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('open');
-                }
-            });
-        });
-
-        // Animação de Scroll para as seções
-        const sectionObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        contentSections.forEach(section => {
-            sectionObserver.observe(section);
-        });
+    sections.forEach(section => {
+        scrollObserver.observe(section);
+    });
 
 
-        // Destaque do link ativo na sidebar com base na rolagem
-        const activeLinkObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    const activeLink = document.querySelector(`.sidebar-link[href="#${id}"]`);
-
-                    sidebarLinks.forEach(link => link.classList.remove('active'));
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                    }
-                }
-            });
-        }, { rootMargin: '-30% 0px -70% 0px' });
-
-        contentSections.forEach(section => {
-            activeLinkObserver.observe(section);
-        });
+    // --------------------------------------------------------------------------
+    // 3. ATUALIZAÇÃO DINÂMICA DO ANO NO RODAPÉ
+    // --------------------------------------------------------------------------
+    const yearSpan = document.getElementById('current-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
     }
 
 });
