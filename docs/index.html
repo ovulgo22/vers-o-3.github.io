@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfólio dinâmico de [Seu Nome], Desenvolvedor Full-stack Sênior e Arquiteto de Software. Projetos e artigos atualizados em tempo real via API.">
+    <meta name="description" content="Portfólio Vivo de [Seu Nome], Arquiteto de Software. Um dashboard em tempo real da minha atividade de desenvolvimento, artigos e jornada profissional.">
     <meta name="author" content="[Seu Nome]">
     
-    <title>[Seu Nome] | Portfólio Dinâmico</title>
+    <title>[Seu Nome] | Portfólio Vivo</title>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔹</text></svg>">
 
@@ -15,67 +15,16 @@
 </head>
 <body class="theme-dark">
 
-    <header class="main-header">
-        <div class="container header-container">
-            <a href="#" class="logo" aria-label="Página Inicial">
-                <span id="logo-icon" class="icon"></span>
-                <span>[Seu Nome]</span>
-            </a>
-            <nav class="main-nav">
-                <a href="#sobre">Sobre</a>
-                <a href="#projetos">Projetos</a>
-                <a href="#artigos">Artigos</a>
-                <a href="#contato">Contato</a>
-            </nav>
-            <div class="header-actions">
-                <button id="command-palette-toggle" class="icon-button" aria-label="Abrir paleta de comandos (Ctrl+K)">
-                    <span id="command-icon" class="icon"></span>
-                </button>
-                <button id="theme-toggle" class="icon-button" aria-label="Alternar tema de cores">
-                    <span id="theme-icon" class="icon"></span>
-                </button>
-                <button id="mobile-menu-toggle" class="icon-button mobile-only" aria-label="Abrir menu de navegação">
-                    <span id="menu-icon" class="icon"></span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <header class="main-header"></header>
 
     <div class="main-wrapper container">
         
         <aside class="sidebar">
             <nav class="sidebar-nav">
                 <section class="sidebar-section">
-                    <h3 class="sidebar-title">Introdução</h3>
+                    <h3 class="sidebar-title">Comunidade</h3>
                     <ul>
-                        <li><a href="#boas-vindas" class="sidebar-link active">Boas-vindas</a></li>
-                        <li><a href="#sobre" class="sidebar-link">Filosofia</a></li>
-                    </ul>
-                </section>
-                <section class="sidebar-section">
-                    <h3 class="sidebar-title">Carreira</h3>
-                    <ul>
-                        <li><a href="#jornada" class="sidebar-link">Jornada Profissional</a></li>
-                    </ul>
-                </section>
-                <section class="sidebar-section">
-                    <h3 class="sidebar-title">Portfólio</h3>
-                    <ul>
-                        <li><a href="#projetos" class="sidebar-link">Projetos (Live do GitHub)</a></li>
-                        <li><a href="#artigos" class="sidebar-link">Artigos (Live do Dev.to)</a></li>
-                    </ul>
-                </section>
-                <section class="sidebar-section">
-                    <h3 class="sidebar-title">Toolbox</h3>
-                     <ul>
-                        <li><a href="#competencias" class="sidebar-link">Competências</a></li>
-                        <li><a href="#ferramentas" class="sidebar-link">Meu Setup</a></li>
-                    </ul>
-                </section>
-                 <section class="sidebar-section">
-                    <h3 class="sidebar-title">Contato</h3>
-                    <ul>
-                        <li><a href="#contato" class="sidebar-link">Conecte-se</a></li>
+                        <li><a href="#guestbook" class="sidebar-link">Kudos (Recados)</a></li>
                     </ul>
                 </section>
             </nav>
@@ -85,136 +34,85 @@
             
             <section id="boas-vindas" class="content-section">
                 <div class="hero">
-                    <h1 class="hero-title">Construindo Sistemas, Não Apenas Software.</h1>
-                    <p class="hero-subtitle">Arquiteto de Software e Desenvolvedor Full-stack Sênior transformando desafios de negócio em ecossistemas tecnológicos robustos, escaláveis e de alta performance.</p>
-                    <div class="status-badge">
-                        <span class="status-light"></span>
-                        <span>Foco atual: Arquitetura Serverless & Go</span>
+                    <h1 class="hero-title">Construindo Sistemas Vivos.</h1>
+                    <p class="hero-subtitle">Arquiteto de Software transformando desafios de negócio em ecossistemas tecnológicos que respiram dados e evoluem continuamente.</p>
+                    <div id="wakatime-stats" class="stats-container">
+                        <h3 class="stats-title">Atividade de Código (Últimos 7 Dias)</h3>
+                        <div class="loader">Carregando dados do WakaTime...</div>
                     </div>
                 </div>
             </section>
             
-            <section id="sobre" class="content-section">
-                <h2>Filosofia de Arquitetura</h2>
-                <p>Minha abordagem é construir sistemas que perduram. Foco em código limpo, design patterns e arquiteturas orientadas a domínio (DDD) para criar soluções que não apenas atendem aos requisitos de hoje, mas que são flexíveis para se adaptar às demandas de amanhã.</p>
-            </section>
-
             <section id="jornada" class="content-section">
                 <h2>Jornada Profissional</h2>
                 <div class="timeline">
-                    <div class="timeline-item">
+                    <div class="timeline-item interactive" data-modal-id="job-architect">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <time>2023 - Presente</time>
                             <h3>Arquiteto de Software @ Tech Solutions Inc.</h3>
-                            <p>Liderando o design de plataformas de microsserviços para o setor financeiro, com foco em alta disponibilidade e baixa latência.</p>
+                            <p>Liderando o design de plataformas de microsserviços. <span>(Clique para ver mais)</span></p>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <time>2020 - 2023</time>
-                            <h3>Desenvolvedor Full-stack Sênior @ InovaCode</h3>
-                            <p>Atuei como líder técnico no desenvolvimento de um Design System em React e na migração de um monolito para uma arquitetura baseada em eventos.</p>
-                        </div>
                     </div>
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <time>2018 - 2020</time>
-                            <h3>Engenheiro de Software Pleno @ Data Systems</h3>
-                            <p>Desenvolvimento e manutenção de APIs RESTful em Node.js e otimização de queries em bancos de dados PostgreSQL.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="projetos" class="content-section">
-                <h2>Projetos em Destaque (Live do GitHub)</h2>
-                <p>Meus repositórios fixados, atualizados em tempo real via API do GitHub. Mostrando não apenas o que eu fiz, mas o que estou fazendo.</p>
-                <div id="github-projects-grid" class="project-grid">
-                    <div class="loader">Carregando projetos do GitHub...</div>
-                </div>
-            </section>
-
-            <section id="artigos" class="content-section">
-                <h2>Artigos Recentes (Live do Dev.to)</h2>
-                <p>Acredito que conhecimento compartilhado é conhecimento multiplicado. Estes são meus últimos artigos, carregados via API do Dev.to.</p>
-                <div id="devto-articles-container">
-                     <div class="loader">Carregando artigos do Dev.to...</div>
-                </div>
-            </section>
-            
-            <section id="competencias" class="content-section">
-                <h2>Principais Competências</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">Go (Golang)</div>
-                    <div class="skill-card">TypeScript</div>
-                    <div class="skill-card">Node.js</div>
-                    <div class="skill-card">React / Next.js</div>
-                    <div class="skill-card">System Design</div>
-                    <div class="skill-card">Microsserviços</div>
-                    <div class="skill-card">AWS (Serverless)</div>
-                    <div class="skill-card">Kubernetes</div>
-                    <div class="skill-card">CI/CD</div>
-                    <div class="skill-card">GraphQL</div>
-                </div>
             </section>
 
             <section id="ferramentas" class="content-section">
                 <h2>Meu Setup de Desenvolvimento</h2>
                 <div class="tools-grid">
                     <div>
-                        <h3>Hardware & OS</h3>
+                        <h3>Editor & Terminal</h3>
                         <ul>
-                            <li>MacBook Pro M3 Max</li>
-                            <li>Monitor 4K Ultrawide</li>
-                            <li>Teclado Mecânico Keychron</li>
-                            <li>MacOS com zsh</li>
-                        </ul>
+                            <li class="interactive" data-modal-id="tool-vscode">VS Code <span>(Por quê?)</span></li>
+                            <li class="interactive" data-modal-id="tool-warp">Warp Terminal <span>(Por quê?)</span></li>
+                            </ul>
                     </div>
-                    <div>
-                        <h3>Software & Ferramentas</h3>
-                        <ul>
-                            <li>VS Code com tema SynthWave '84</li>
-                            <li>iTerm2 / Warp</li>
-                            <li>Docker & Kubernetes</li>
-                            <li>Postman / Insomnia</li>
-                        </ul>
                     </div>
+            </section>
+            
+            <section id="guestbook" class="content-section">
+                <h2>Kudos & Recados</h2>
+                <p>Gostou do que viu? Sinta-se à vontade para deixar um recado. Esta seção demonstra a integração com um backend serverless para persistência de dados.</p>
+                <div class="guestbook-container">
+                    <div id="guestbook-entries">
+                        <div class="loader">Carregando recados...</div>
+                    </div>
+                    <form id="guestbook-form" class="guestbook-form">
+                        <h3>Deixe seu Kudos:</h3>
+                        <div class="form-group">
+                            <label for="guestName">Seu nome:</label>
+                            <input type="text" id="guestName" name="name" required maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="guestMessage">Sua mensagem:</label>
+                            <textarea id="guestMessage" name="message" required maxlength="280"></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Enviar Recado</button>
+                    </form>
                 </div>
             </section>
 
-            <section id="contato" class="content-section">
-                <h2>Vamos Construir Algo Incrível?</h2>
-                <p>Estou sempre em busca de desafios que exijam soluções criativas e robustas. Se você tem um projeto assim, vamos conversar.</p>
-                <div class="contact-links">
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="contact-link-item"><span id="github-icon-contact" class="icon"></span> GitHub</a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="contact-link-item"><span id="linkedin-icon-contact" class="icon"></span> LinkedIn</a>
-                    <a href="mailto:seuemail@email.com" class="contact-link-item"><span id="mail-icon-contact" class="icon"></span> Email</a>
-                </div>
-            </section>
-        </main>
+            </main>
     </div>
 
     <footer class="main-footer">
-        <div class="container">
-            <p>&copy; <span id="current-year">2025</span> [Seu Nome]. Construído com uma arquitetura pensada para o futuro.</p>
+        <div class="container footer-content">
+            <p>&copy; <span id="current-year">2025</span> [Seu Nome].</p>
+            <div id="spotify-container" class="spotify-container">
+                <div class="loader">Carregando Spotify...</div>
+            </div>
         </div>
     </footer>
     
-    <div id="command-palette" class="command-palette-overlay palette-hidden">
-        <div class="command-palette-modal">
-            <div class="command-palette-header">
-                <span id="search-icon" class="icon"></span>
-                <input type="text" id="command-palette-input" placeholder="Navegue ou pesquise...">
-                <button id="command-palette-close" class="close-button">ESC</button>
-            </div>
-            <ul id="command-palette-results" class="command-palette-results">
-            </ul>
+    <div id="generic-modal" class="modal-overlay modal-hidden">
+        <div class="modal-content">
+            <button id="modal-close-button" class="modal-close-button">&times;</button>
+            <h2 id="modal-title" class="modal-title"></h2>
+            <div id="modal-body" class="modal-body"></div>
         </div>
     </div>
-
+    
+    <script src="config.js" defer></script>
     <script src="icons.js" defer></script>
     <script src="api.js" defer></script>
     <script src="script.js" defer></script>
