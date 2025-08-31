@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- CONFIGURAÇÃO ---
     // Substitua pelos seus nomes de usuário.
-    const GITHUB_USERNAME = 'SEU-USUARIO-GITHUB';
-    const DEVTO_USERNAME = 'SEU-USUARIO-DEVTO';
+    const GITHUB_USERNAME = 'ovulgo22';
+    const DEVTO_USERNAME = 'ovulgo22';
     const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`;
     const DEVTO_API_URL = `https://dev.to/api/articles?username=${DEVTO_USERNAME}&per_page=3`;
 
