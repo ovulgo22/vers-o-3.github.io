@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ARQUITETURA DO SCRIPT (V2.0 FINAL)
+   ARQUITETURA DO SCRIPT (V2.1 FINAL)
    - Módulos encapsulados em um listener DOMContentLoaded.
    - Funções com responsabilidades únicas.
    - Gerenciamento de estado para funcionalidades interativas.
@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.remove('theme-light', 'theme-dark');
         body.classList.add(`theme-${theme}`);
         localStorage.setItem('theme', theme);
+
+        // O objeto 'icons' vem do escopo global de icons.js
         if (themeIcon && window.icons) {
             themeIcon.innerHTML = theme === 'light' ? icons.sun : icons.moon;
         }
@@ -38,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggleButton.addEventListener('click', toggleTheme);
     }
 
+    // Define o tema inicial baseado na preferência salva ou do sistema
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
@@ -47,25 +50,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // --------------------------------------------------------------------------
     const sections = document.querySelectorAll('.content-section');
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
     if (sections.length > 0 && sidebarLinks.length > 0) {
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                // Ativa a animação de entrada
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
+                
+                    // Atualiza o link ativo na sidebar (Scrollspy)
                     const id = entry.target.getAttribute('id');
                     const correspondingLink = document.querySelector(`.sidebar-link[href="#${id}"]`);
+                    
                     if (correspondingLink) {
-                        sidebarLinks.forEach(link => link.classList.remove('active'));
-                        correspondingLink.classList.add('active');
+                         sidebarLinks.forEach(link => link.classList.remove('active'));
+                         correspondingLink.classList.add('active');
                     }
                 }
             });
-        }, { threshold: 0.3 });
-        sections.forEach(section => scrollObserver.observe(section));
+        }, { threshold: 0.3 }); // Ativa quando 30% da seção está visível
+
+        sections.forEach(section => {
+            scrollObserver.observe(section);
+        });
     }
 
     // --------------------------------------------------------------------------
-    // 3. PALETA DE COMANDOS
+    // 3. PALETA DE COMANDOS (LÓGICA CORRIGIDA)
     // --------------------------------------------------------------------------
     const paletteToggle = document.getElementById('command-palette-toggle');
     const paletteOverlay = document.getElementById('command-palette');
@@ -74,15 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const paletteClose = document.getElementById('command-palette-close');
 
     const commands = [
-        { name: 'Ir para Início', action: () => document.getElementById('boas-vindas').scrollIntoView(), icon: 'logo' },
-        { name: 'Ver Projetos', action: () => document.getElementById('projetos').scrollIntoView(), icon: 'folder' },
-        { name: 'Ler Artigos', action: () => document.getElementById('artigos').scrollIntoView(), icon: 'mail' },
-        { name: 'Ver Minha Jornada', action: () => document.getElementById('jornada').scrollIntoView(), icon: 'command' },
-        { name: 'Ver Meu Setup', action: () => document.getElementById('ferramentas').scrollIntoView(), icon: 'menu' },
-        { name: 'Entrar em Contato', action: () => document.getElementById('contato').scrollIntoView(), icon: 'mail' },
-        { name: 'Ver Código Fonte no GitHub', action: () => window.open('https://github.com/ovulgo22/vers-o-3.github.io/tree/main', '_blank'), icon: 'github' },
+        { name: 'Ir para Início', action: () => document.getElementById('boas-vindas').scrollIntoView({behavior: "smooth"}), icon: 'logo' },
+        { name: 'Ver Projetos', action: () => document.getElementById('projetos').scrollIntoView({behavior: "smooth"}), icon: 'folder' },
+        { name: 'Ler Artigos', action: () => document.getElementById('artigos').scrollIntoView({behavior: "smooth"}), icon: 'mail' },
+        { name: 'Ver Minha Jornada', action: () => document.getElementById('jornada').scrollIntoView({behavior: "smooth"}), icon: 'command' },
+        { name: 'Ver Meu Setup', action: () => document.getElementById('ferramentas').scrollIntoView({behavior: "smooth"}), icon: 'menu' },
+        { name: 'Entrar em Contato', action: () => document.getElementById('contato').scrollIntoView({behavior: "smooth"}), icon: 'mail' },
+        { name: 'Ver Código Fonte no GitHub', action: () => window.open(`https://github.com/${'SEU-USUARIO-GITHUB'}/${'SEU-USUARIO-GITHUB'}.github.io`, '_blank'), icon: 'github' },
         { name: 'Alternar Tema (Light/Dark)', action: toggleTheme, icon: 'theme' }
     ];
+
+    let activeCommandIndex = 0;
 
     const renderCommands = (filter = '') => {
         paletteResults.innerHTML = '';
@@ -91,9 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
         filteredCommands.forEach((cmd, index) => {
             const li = document.createElement('li');
             li.dataset.index = index;
-            // O ícone do tema é especial, precisa saber qual mostrar
+            // O ícone do tema precisa saber qual mostrar (sol ou lua)
             const iconName = cmd.icon === 'theme' ? (body.classList.contains('theme-light') ? 'moon' : 'sun') : cmd.icon;
-            li.innerHTML = `<span class="icon">${icons[iconName] || ''}</span> ${cmd.name}`;
+            li.innerHTML = `<span class="icon">${window.icons[iconName] || ''}</span> ${cmd.name}`;
+            
             li.addEventListener('click', () => {
                 cmd.action();
                 closePalette();
@@ -103,27 +117,26 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActiveCommand(0);
     };
 
-    let activeCommandIndex = 0;
     const updateActiveCommand = (newIndex) => {
         const items = paletteResults.querySelectorAll('li');
         if (items.length === 0) return;
         
         items[activeCommandIndex]?.classList.remove('is-active');
-        activeCommandIndex = (newIndex + items.length) % items.length; // Garante que o índice seja cíclico
+        activeCommandIndex = (newIndex + items.length) % items.length;
         items[activeCommandIndex].classList.add('is-active');
         items[activeCommandIndex].scrollIntoView({ block: 'nearest' });
     };
 
     const openPalette = () => {
-        paletteOverlay.hidden = false;
-        body.style.overflow = 'hidden';
+        paletteOverlay.classList.remove('palette-hidden');
+        body.classList.add('palette-open');
         paletteInput.focus();
         renderCommands();
     };
 
     const closePalette = () => {
-        paletteOverlay.hidden = true;
-        body.style.overflow = '';
+        paletteOverlay.classList.add('palette-hidden');
+        body.classList.remove('palette-open');
         paletteInput.value = '';
     };
 
@@ -139,8 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateActiveCommand(activeCommandIndex - 1);
         } else if (e.key === 'Enter') {
             e.preventDefault();
-            const activeItem = items[activeCommandIndex];
-            if (activeItem) activeItem.click();
+            items[activeCommandIndex]?.click();
         }
     };
     
@@ -155,10 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 openPalette();
             }
-            if (e.key === 'Escape' && !paletteOverlay.hidden) {
+            if (e.key === 'Escape' && !paletteOverlay.classList.contains('palette-hidden')) {
                 closePalette();
             }
-            if (!paletteOverlay.hidden) {
+            if (!paletteOverlay.classList.contains('palette-hidden')) {
                 handlePaletteKeyDown(e);
             }
         });
