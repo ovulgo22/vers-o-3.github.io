@@ -3,139 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fronteiras da Computação | IA & Quântica</title>
-    <meta name="description" content="Um portal educacional completo para explorar os mundos da Inteligência Artificial e da Computação Quântica.">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚛️%3C/text%3E%3C/svg%3E">
-    <meta name="theme-color" content="#8B5CF6">
+    <title>QuantumAI - Explorando as Fronteiras da Computação</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
 </head>
-<body>
+<body class="home-page">
 
-    <div class="aurora-background">
-        <div class="aurora-shape shape1"></div>
-        <div class="aurora-shape shape2"></div>
-        <div class="aurora-shape shape3"></div>
-    </div>
+    <canvas id="particles-js"></canvas>
 
-    <header class="site-header fixed">
+    <header class="main-header">
         <div class="container">
-            <a href="#home" class="logo-link nav-link" aria-label="Página Inicial">
-                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2L12 6 M12 18L12 22 M22 12L18 12 M6 12L2 12 M19.071 4.929L16.242 7.758 M7.758 16.242L4.929 19.071 M19.071 19.07L16.242 16.242 M7.758 7.758L4.929 4.929" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                <span>Fronteiras.dev</span>
+            <a href="index.html" class="logo-link">
+                <img src="logo.svg" alt="QuantumAI Logo" class="logo">
+                <span>QuantumAI</span>
             </a>
-            <nav class="main-nav" id="main-nav">
-                <a href="#docs" class="nav-link">Documentação</a>
-                <a href="#timeline" class="nav-link">Linha do Tempo</a>
-                <a href="#glossary" class="nav-link">Glossário</a>
-                <a href="#tools" class="nav-link">Ferramentas</a>
-                <a href="#playground" class="nav-link nav-highlight">Playground</a>
+            <nav>
+                <a href="docs.html" class="nav-link">Acessar Documentação</a>
             </nav>
-            <button class="mobile-nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
-                <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
-            </button>
         </div>
     </header>
 
-    <main id="view-home" role="main" class="page-view">
-        <canvas id="hero-animation"></canvas>
-        <section class="hero" id="hero-section">
-            <div class="container">
-                <h1 class="hero-title" data-scroll-fade>Explorando as Fronteiras da Computação</h1>
-                <p class="hero-subtitle" data-scroll-fade>Uma jornada profunda, interativa e completa pela Inteligência Artificial e a Revolução Quântica.</p>
-                <a href="#docs" class="cta-button nav-link" data-scroll-fade>Iniciar Aprendizagem</a>
-            </div>
-        </section>
-        <div class="scroll-indicator"><span>Role para explorar</span></div>
-    </main>
-
-    <main id="view-docs" role="main" class="page-view docs-layout hidden">
-        <aside class="sidebar" id="sidebar-nav" role="complementary">
-            </aside>
-        <div class="content">
-            </div>
-    </main>
-    
-    <main id="view-timeline" role="main" class="page-view hidden">
-        <div class="page-main">
-            <div class="container">
-                <h1 class="page-title">Linha do Tempo da Computação</h1>
-                <p class="page-subtitle">Marcos históricos que moldaram a Inteligência Artificial e a Computação Quântica.</p>
-                <div class="timeline">
-                    </div>
-            </div>
-        </div>
-    </main>
-
-    <main id="view-glossary" role="main" class="page-view hidden">
-        <div class="page-main">
-            <div class="container">
-                <h1 class="page-title">Glossário de Termos</h1>
-                <p class="page-subtitle">Definições rápidas para os conceitos mais importantes em IA e Computação Quântica.</p>
-                <div class="search-wrapper">
-                    <input type="text" id="glossary-search" placeholder="Buscar por um termo..." aria-label="Buscar no glossário">
-                </div>
-                <div class="glossary-grid" id="glossary-grid">
-                    </div>
-            </div>
-        </div>
-    </main>
-
-    <main id="view-tools" role="main" class="page-view hidden">
-        <div class="page-main">
-            <div class="container">
-                <h1 class="page-title">Ferramentas e Tecnologias</h1>
-                <p class="page-subtitle">O ecossistema de frameworks, bibliotecas e plataformas que impulsionam a inovação.</p>
-                <h2 class="section-title">Inteligência Artificial</h2>
-                <div class="tools-grid">
-                    </div>
-                </div>
-        </div>
-    </main>
-
-    <main id="view-playground" role="main" class="page-view hidden">
-        <div class="page-main">
-            <div class="container">
-                <h1 class="page-title">Playground Interativo</h1>
-                <section class="playground-section" id="quantum-simulator">
-                    </section>
-                <section class="playground-section" id="api-oracle">
-                    </section>
-            </div>
-        </div>
-    </main>
-    
-    <footer class="site-footer">
+    <main class="hero-section">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="#home" class="logo-link nav-link">
-                        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2L12 6 M12 18L12 22 M22 12L18 12 M6 12L2 12 M19.071 4.929L16.242 7.758 M7.758 16.242L4.929 19.071 M19.071 19.07L16.242 16.242 M7.758 7.758L4.929 4.929" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                        <span>Fronteiras.dev</span>
-                    </a>
-                    <p class="footer-about">Um portal educacional para desbravar as fronteiras da tecnologia.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="#docs" class="nav-link">Documentação</a></li>
-                        <li><a href="#timeline" class="nav-link">Linha do Tempo</a></li>
-                        <li><a href="#glossary" class="nav-link">Glossário</a></li>
-                        <li><a href="#tools" class="nav-link">Ferramentas</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom"><p>&copy; 2025 Fronteiras.dev. Todos os direitos reservados.</p></div>
+            <h1 class="hero-title">Explorando as Fronteiras da Computação</h1>
+            <p class="hero-subtitle">Uma jornada profunda pela Inteligência Artificial e a Revolução Quântica.</p>
+            <a href="docs.html" class="cta-button">Iniciar Aprendizagem</a>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 QuantumAI. Todos os direitos reservados.</p>
         </div>
     </footer>
 
