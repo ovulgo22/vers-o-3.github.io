@@ -6,10 +6,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- CONFIGURAÇÃO ---
-    // Substitua pelos seus nomes de usuário.
-    const GITHUB_USERNAME = 'ovulgo22';
-    const DEVTO_USERNAME = 'ovulgo22';
+    // !!! IMPORTANTE: Substitua os valores abaixo pelos seus nomes de usuário.
+    const GITHUB_USERNAME = 'SEU-USUARIO-GITHUB';
+    const DEVTO_USERNAME = 'SEU-USUARIO-DEVTO';
+    
+    // Busca os 6 repositórios atualizados mais recentemente
     const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`;
+    // Busca os 3 artigos mais recentes
     const DEVTO_API_URL = `https://dev.to/api/articles?username=${DEVTO_USERNAME}&per_page=3`;
 
     // --- Seletores do DOM ---
@@ -18,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Busca e renderiza os projetos do GitHub.
-     * Pega os 6 repositórios atualizados mais recentemente.
      */
     const fetchGitHubProjects = async () => {
         try {
@@ -36,12 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Acessa o objeto 'icons' que foi definido no escopo global por icons.js
+            const folderIcon = window.icons?.folder || '';
+            const githubIcon = window.icons?.github || '';
+
             repos.forEach(repo => {
                 const projectCard = document.createElement('div');
                 projectCard.className = 'project-card';
                 projectCard.innerHTML = `
                     <div class="project-header">
-                        <span id="folder-icon-${repo.id}" class="icon">${icons.folder}</span>
+                        <span class="icon">${folderIcon}</span>
                         <h3 class="project-title">${repo.name}</h3>
                     </div>
                     <p class="project-description">${repo.description || 'Sem descrição.'}</p>
@@ -49,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="project-tech">⭐ ${repo.stargazers_count} &nbsp;&nbsp; • &nbsp;&nbsp; ${repo.language || 'N/A'}</span>
                         <div class="project-links">
                             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" aria-label="Ver código no GitHub" class="icon-button">
-                                <span id="github-icon-project-${repo.id}" class="icon">${icons.github}</span>
+                                <span class="icon">${githubIcon}</span>
                             </a>
                         </div>
                     </div>
@@ -105,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- INICIALIZAÇÃO ---
+    // Garante que os seletores existam antes de fazer as chamadas de API
     if (projectsGrid) {
         fetchGitHubProjects();
     }
